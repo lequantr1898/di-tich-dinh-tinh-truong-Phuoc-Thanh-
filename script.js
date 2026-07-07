@@ -1091,6 +1091,17 @@ if (modelViewerEl) {
       const position = geometry.attributes.position;
       const tempV = new THREE.Vector3();
 
+      let minY = Infinity, maxY = -Infinity;
+      let minZ = Infinity, maxZ = -Infinity;
+      for (let i = 0; i < position.count; i++) {
+        tempV.fromBufferAttribute(position, i);
+        if (tempV.y < minY) minY = tempV.y;
+        if (tempV.y > maxY) maxY = tempV.y;
+        if (tempV.z < minZ) minZ = tempV.z;
+        if (tempV.z > maxZ) maxZ = tempV.z;
+      }
+      console.log(`[THREE.JS COORDINATES] Range Y: [${minY.toFixed(4)}, ${maxY.toFixed(4)}], Z: [${minZ.toFixed(4)}, ${maxZ.toFixed(4)}]`);
+
       let modifiedCount = 0;
       for (let i = 0; i < position.count; i++) {
         tempV.fromBufferAttribute(position, i);
