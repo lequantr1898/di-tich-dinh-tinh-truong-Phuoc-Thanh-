@@ -1041,10 +1041,10 @@ if (modelViewerEl) {
     }
   });
 
-  // Tải Three.js Plane để che đậy mặt sau của Dinh (khớp hoàn toàn với kích thước thực tế của GLB)
+  // Tải Three.js: xóa mái che mặt sau + tạo bức tường mỏng che phủ mặt sau dinh
   modelViewerEl.addEventListener('load', () => {
     try {
-      // Tìm Symbol scene của model-viewer để can thiệp trực tiếp vào Three.js scene graph
+      // Truy cập Three.js scene từ model-viewer qua Symbol nội bộ
       const sceneSymbol = Object.getOwnPropertySymbols(modelViewerEl).find(s => s.description === 'scene');
       const scene = sceneSymbol ? modelViewerEl[sceneSymbol] : null;
       
@@ -1052,37 +1052,126 @@ if (modelViewerEl) {
         console.warn("[THREE.JS] Không tìm thấy Three.js scene trên model-viewer.");
         return;
       }
+
+      // Tìm model root group - node gốc chứa toàn bộ mô hình GLB
+      // để làm việc trực tiếp trong hệ tọa độ gốc của mô hình (model space)
+      let modelRoot = null;
+      for (let i = 0; i < scene.children.length; i++) {
+        const child = scene.children[i];
+        let hasMesh = false;
+        child.traverse(c => { if (c.isMesh) hasMesh = true; });
+        if (hasMesh) {
+          modelRoot = child;
+          break;
+        }
+      }
+      if (!modelRoot) modelRoot = scene;
+
+      scene.updateMatrixWorld(true);
+
+      // Ma trận nghịch đảo để chuyển tọa độ world → model local space
+      const modelWorldInverse = new THREE.Matrix4().copy(modelRoot.matrixWorld).invert();
+
+      // === BƯỚC 1: XÓA MÁI CHE MẶT SAU ===
+      // Duyệt tất cả mesh, ẩn các mặt tam giác nằm trong vùng mái che mặt sau
+      // Điều kiện xóa: toạ độ thế giới có y >= 6.5 và z <= -4.0 (sâu vào 1m tính từ mặt sau z = -5)
+      scene.traverse((child) => {
+        if (!child.isMesh) return;
+        
+        const geometry = child.geometry;
+        if (!geometry.index) return;
+        
+        const posAttr = geometry.attributes.position;
+        const indexAttr = geometry.index;
+        const indices = indexAttr.array;
+        
+        // Lưu giữ bản sao của indices gốc nếu chưa lưu
+        if (!geometry.userData.originalIndices) {
+          geometry.userData.originalIndices = Array.from(indices);
+        }
+        const originalIndices = geometry.userData.originalIndices;
+        
+        const vA = new THREE.Vector3();
+        const vB = new THREE.Vector3();
+        const vC = new THREE.Vector3();
+        
+        let hiddenTriangles = 0;
+        
+        for (let i = 0; i < originalIndices.length; i += 3) {
+          const idxA = originalIndices[i];
+          const idxB = originalIndices[i + 1];
+          const idxC = originalIndices[i + 2];
+          
+          vA.fromBufferAttribute(posAttr, idxA).applyMatrix4(child.matrixWorld);
+          vB.fromBufferAttribute(posAttr, idxB).applyMatrix4(child.matrixWorld);
+          vC.fromBufferAttribute(posAttr, idxC).applyMatrix4(child.matrixWorld);
+          
+          // Tính toạ độ trung bình (trọng tâm) tam giác
+          const avgY = (vA.y + vB.y + vC.y) / 3;
+          const avgZ = (vA.z + vB.z + vC.z) / 3;
+          
+          // Nếu tam giác thuộc khu vực mái che phía sau (y >= 6.5 và z <= -4.0)
+          if (avgY >= 6.5 && avgZ <= -4.0) {
+            indices[i] = 0;
+            indices[i + 1] = 0;
+            indices[i + 2] = 0;
+            hiddenTriangles++;
+          } else {
+            indices[i] = idxA;
+            indices[i + 1] = idxB;
+            indices[i + 2] = idxC;
+          }
+        }
+        
+        indexAttr.needsUpdate = true;
+        console.log(`[THREE.JS] Đã ẩn ${hiddenTriangles} tam giác của mái che mặt sau trên mesh: ${child.name}`);
+      });
+
+      // === BƯỚC 2: TẠO BỨC TƯỜNG MỎNG CHE MẶT SAU (Z = -5) ===
+      // Bức tường bắt đầu từ mép dưới chậu cây (y = 1.1) lên đến độ cao y = 6.7
+      const bbox = new THREE.Box3().setFromObject(modelRoot);
+      const minX = bbox.min.x;
+      const maxX = bbox.max.x;
       
-      // Tạo một mặt phẳng có chất liệu Standard có phản xạ ánh sáng tự nhiên trùng khớp với tường dinh
-      const geometry = new THREE.PlaneGeometry(1.85, 1.3);
-      const material = new THREE.MeshStandardMaterial({
-        color: 0xead9b6, // Tông màu be trầm trùng với màu tường dinh mặt ngoài
+      // Chuyển đổi các toạ độ biên từ thế giới sang local của modelRoot
+      const localBottomCenter = new THREE.Vector3((minX + maxX) / 2, 1.1, -5.0).applyMatrix4(modelWorldInverse);
+      const localTopCenter = new THREE.Vector3((minX + maxX) / 2, 6.7, -5.0).applyMatrix4(modelWorldInverse);
+      
+      const localLeft = new THREE.Vector3(minX, 3.9, -5.0).applyMatrix4(modelWorldInverse);
+      const localRight = new THREE.Vector3(maxX, 3.9, -5.0).applyMatrix4(modelWorldInverse);
+      
+      const localWidth = localLeft.distanceTo(localRight);
+      const localHeight = localBottomCenter.distanceTo(localTopCenter);
+      
+      const wallGeo = new THREE.PlaneGeometry(localWidth, localHeight);
+      const wallMat = new THREE.MeshStandardMaterial({
+        color: 0xead9b6, // Tông màu be trùng với màu tường chính của dinh
         roughness: 0.85,
         metalness: 0.05,
         side: THREE.DoubleSide
       });
-      const backWall = new THREE.Mesh(geometry, material);
-      
-      // Đặt tên
+      const backWall = new THREE.Mesh(wallGeo, wallMat);
       backWall.name = "backWallCover";
       
-      // Định vị sát cạnh sau cùng Z = -0.68 và dịch trọng tâm Y để che kín khoang rỗng bên trong
-      backWall.position.set(0, -0.08, -0.675);
-      backWall.rotation.y = Math.PI; // Quay mặt phẳng về phía sau
+      // Đặt vị trí chính xác trong local space
+      const localCenter = new THREE.Vector3().addVectors(localBottomCenter, localTopCenter).multiplyScalar(0.5);
+      backWall.position.copy(localCenter);
       
-      scene.add(backWall);
-      console.log("%c[THREE.JS] Đã tạo thành công bức tường 3D che phủ phẳng mặt sau dinh.", "color: #0288d1; font-weight: bold;");
+      // Xóa tường cũ nếu có trước khi thêm mới
+      const oldWall = modelRoot.getObjectByName("backWallCover");
+      if (oldWall) {
+        modelRoot.remove(oldWall);
+      }
+      
+      modelRoot.add(backWall);
+      console.log("[THREE.JS] Đã dựng bức tường mỏng che phủ mặt sau tại z=-5 (y: 1.1 -> 6.7)");
+
+      // Yêu cầu model-viewer render lại khung hình
+      modelViewerEl.requestUpdate();
+
     } catch (e) {
-      console.error("[THREE.JS Error] Không thể chèn mesh che phủ:", e);
+      console.error("[THREE.JS Error] Không thể xử lý mặt sau:", e);
     }
   });
-}
-
-// Toggle room selection list on mobile
-function toggleRoomPanel() {
-  const panel = document.getElementById("roomPanel");
-  if (panel) {
-    panel.classList.toggle("collapsed-mobile");
-  }
 }
 

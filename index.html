@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Lora:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
     rel="stylesheet">
 
   <!-- Model Viewer (3D GLB) -->
@@ -53,18 +53,12 @@
       height: 100vh;
     }
 
-    p, .timeline-desc, .text-description, .map-detail-value {
-      font-family: 'Lora', serif;
-      font-size: 19px;
-      line-height: 1.65;
-    }
-
     /* ============ SPLASH SCREEN ============ */
     #splashScreen {
       position: fixed;
       inset: 0;
       z-index: 10000;
-      background: url('anhdinh/splashscreen.png') center/cover no-repeat;
+      background: url('splashscreen.png') center/cover no-repeat;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -102,7 +96,7 @@
     .splash-title-sub {
       font-size: clamp(20px, 3.5vw, 36px);
       font-weight: 700;
-      font-family: 'EB Garamond', serif;
+      font-family: 'Playfair Display', serif;
       color: var(--bg-cream);
       letter-spacing: 0.05em;
       margin-bottom: 8px;
@@ -110,16 +104,14 @@
     }
 
     .splash-title-main {
-      font-size: clamp(24px, 3.8vw, 42px);
+      font-size: clamp(24px, 4.5vw, 48px);
       font-weight: 900;
-      font-family: 'EB Garamond', serif;
+      font-family: 'Playfair Display', serif;
       color: #ffffff;
-      letter-spacing: 0.05em;
-      line-height: 1.3;
+      letter-spacing: 0.02em;
+      line-height: 1.2;
       margin-bottom: 40px;
       text-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
-      word-wrap: break-word;
-      max-width: 100%;
     }
 
     .splash-btn {
@@ -774,7 +766,7 @@
     }
 
     .global-modal-title {
-      font-family: 'EB Garamond', serif;
+      font-family: 'Playfair Display', serif;
       font-size: 20px;
       font-weight: 700;
       color: var(--primary-color);
@@ -1052,46 +1044,19 @@
         padding: 16px;
         font-size: 13.5px;
       }
-      /* Room Panel mobile: floating over 3D model, collapsible */
+      /* Room Panel mobile: bottom bar */
       #roomPanel {
-        position: absolute;
-        left: 16px;
-        right: 16px;
-        bottom: 80px; /* Floats over 3D model, leaving space for zoom controls and footer */
+        left: 0; right: 0;
         top: auto;
+        bottom: 0;
         transform: none;
-        width: auto;
-        border-radius: 12px;
-        max-height: 60vh;
+        width: 100%;
+        border-radius: 14px 14px 0 0;
+        max-height: 45vh;
         overflow-y: auto;
-        border: 1px solid rgba(220,160,95,0.45);
-        box-shadow: 0 12px 40px rgba(0,0,0,0.7);
-        transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 2000;
       }
-      .room-panel-toggle-btn {
-        display: flex !important; /* Show toggle arrow button on mobile */
-      }
-      #roomPanel.collapsed-mobile .room-panel-list {
-        display: none !important;
-      }
-      #roomPanel.collapsed-mobile .room-panel-toggle-btn svg {
-        transform: rotate(180deg); /* point down when collapsed */
-      }
-      .room-panel-header {
-        cursor: pointer;
-        padding: 12px 16px;
-      }
-      .room-panel-list { 
-        display: flex;
-        flex-direction: column; 
-        background: rgba(24, 7, 0, 0.95);
-      }
-      .room-panel-btn { 
-        flex: none; 
-        width: 100%; 
-        border-bottom: 1px solid rgba(220,160,95,0.15);
-      }
+      .room-panel-list { flex-direction: row; flex-wrap: wrap; }
+      .room-panel-btn { flex: 1 1 calc(50% - 8px); min-width: 120px; }
 
       /* Gallery mobile: vertical stack */
       .intro-gallery-section { height: auto; }
@@ -1133,20 +1098,6 @@
       letter-spacing: 0.18em;
       padding: 10px 16px;
       text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      user-select: none;
-    }
-    .room-panel-toggle-btn {
-      background: none;
-      border: none;
-      color: inherit;
-      padding: 0;
-      cursor: pointer;
-      display: none;
-      align-items: center;
-      justify-content: center;
     }
     .room-panel-list { display: flex; flex-direction: column; }
     .room-panel-btn {
@@ -1165,7 +1116,7 @@
     .room-panel-btn:last-child { border-bottom: none; }
     .room-panel-btn:hover { background: rgba(220,160,95,0.15); }
     .rpb-num {
-      font-family: 'EB Garamond', serif;
+      font-family: 'Playfair Display', serif;
       font-size: 18px;
       font-weight: 900;
       color: #dca05f;
@@ -1209,7 +1160,7 @@
       z-index: 2;
     }
     .gallery-photo-label {
-      font-family: 'EB Garamond', serif;
+      font-family: 'Playfair Display', serif;
       font-size: 15px;
       font-weight: 700;
       color: #fff;
@@ -1254,7 +1205,7 @@
     }
     .about-stat { display: flex; flex-direction: column; gap: 2px; }
     .about-stat-num {
-      font-family: 'EB Garamond', serif;
+      font-family: 'Playfair Display', serif;
       font-size: 28px;
       font-weight: 900;
       color: #ab2d0a;
@@ -1313,14 +1264,12 @@
     }
     .timeline-img-wrap {
       position: relative;
-      width: 340px;
-      height: 320px;
+      width: 200px;
+      height: 210px;
       /* Organic blob shape — each pseudo variant differs */
       border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
       overflow: visible;
       flex-shrink: 0;
-      transition: filter 0.6s ease;
-      filter: drop-shadow(0 0 35px rgba(220,160,95,0.05));
     }
     /* Alternate blob shapes for 2nd and 4th items */
     .timeline-item:nth-child(2n) .timeline-img-wrap {
@@ -1332,30 +1281,27 @@
       object-fit: cover;
       display: block;
       border-radius: inherit;
-      /* "Vũng ký ức" (memory puddle) default filter: blur + sepia/grayscale fade */
-      filter: grayscale(15%) sepia(25%) brightness(0.8) blur(3px);
-      transition: filter 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+      filter: sepia(30%) brightness(0.88) contrast(1.05);
+      transition: filter 0.5s ease, transform 0.6s ease;
       /* Mask fades out at edges into background #2c0f00 */
       -webkit-mask-image: radial-gradient(
-        circle,
-        #000 0%,
-        rgba(0,0,0,0.9) 35%,
-        rgba(0,0,0,0.5) 68%,
-        rgba(0,0,0,0.15) 86%,
+        ellipse 78% 78% at 50% 48%,
+        #000 30%,
+        rgba(0,0,0,0.75) 55%,
+        rgba(0,0,0,0.3) 72%,
         transparent 100%
       );
       mask-image: radial-gradient(
-        circle,
-        #000 0%,
-        rgba(0,0,0,0.9) 35%,
-        rgba(0,0,0,0.5) 68%,
-        rgba(0,0,0,0.15) 86%,
+        ellipse 78% 78% at 50% 48%,
+        #000 30%,
+        rgba(0,0,0,0.75) 55%,
+        rgba(0,0,0,0.3) 72%,
         transparent 100%
       );
     }
     .timeline-img-wrap:hover img {
-      filter: grayscale(0%) sepia(0%) brightness(1.05) blur(0px);
-      transform: scale(1.04);
+      filter: sepia(0%) brightness(1.05) contrast(1);
+      transform: scale(1.06);
     }
     /* Soft ambient glow ring underneath the blob */
     .timeline-img-wrap::after {
@@ -1381,128 +1327,18 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
-    /* Timeline item layout: overlapping image and text cards */
+    /* Timeline item layout: side by side with image right */
     .timeline-has-img {
-      position: relative;
       display: flex;
-      align-items: center;
-      width: 100%;
-      height: 380px;
-      margin-top: 18px;
-    }
-    .timeline-img-outer {
-      position: absolute;
-      right: 0;
-      top: 0;
-      width: 440px;
-      height: 380px;
-      z-index: 1;
-      padding: 16px;
-      flex-shrink: 0;
-    }
-    .timeline-img-wrap {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
-      overflow: visible;
-    }
-    .timeline-desc {
-      position: relative;
-      z-index: 10;
-      width: 60%;
-      max-width: 480px;
-      background: rgba(30, 8, 2, 0.72);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(220,160,95,0.22);
-      border-radius: 18px;
-      padding: 28px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
-      margin-left: 20px;
-    }
-    /* Stagger second timeline item image to the left and text to the right */
-    .timeline-item:nth-child(3) .timeline-img-outer {
-      left: 0;
-      right: auto;
-    }
-    .timeline-item:nth-child(3) .timeline-desc {
-      margin-left: auto;
-      margin-right: 20px;
+      align-items: flex-start;
+      gap: 8px;
     }
     .timeline-content { flex: 1; min-width: 0; }
 
-    /* Mobile responsiveness for overlapping cards */
-    @media (max-width: 768px) {
-      .timeline-has-img {
-        height: 380px;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        align-items: stretch;
-        margin-top: 16px;
-      }
-      .timeline-img-outer {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-        padding: 0;
-      }
-      .timeline-img-wrap {
-        width: 100%;
-        height: 100%;
-        max-width: none;
-        border-radius: 20px !important;
-      }
-      .timeline-img-wrap img {
-        /* No blur or sepia on mobile: let it be clear! */
-        filter: grayscale(0%) sepia(0%) brightness(1.0) blur(0px) !important;
-        -webkit-mask-image: radial-gradient(
-          circle at 50% 50%,
-          #000 0%,
-          rgba(0,0,0,0.95) 55%,
-          rgba(0,0,0,0.7) 80%,
-          rgba(0,0,0,0.3) 92%,
-          transparent 100%
-        ) !important;
-        mask-image: radial-gradient(
-          circle at 50% 50%,
-          #000 0%,
-          rgba(0,0,0,0.95) 55%,
-          rgba(0,0,0,0.7) 80%,
-          rgba(0,0,0,0.3) 92%,
-          transparent 100%
-        ) !important;
-      }
-      .timeline-desc {
-        width: 100%;
-        max-width: none;
-        margin: 0 !important;
-        position: relative;
-        z-index: 2;
-        background: linear-gradient(to top, rgba(20,5,0,0.98) 0%, rgba(20,5,0,0.85) 60%, rgba(20,5,0,0.3) 90%, transparent 100%);
-        border: none;
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-        box-shadow: none;
-        padding: 40px 16px 20px 16px;
-        border-radius: 0 0 20px 20px;
-        color: #ffd8a8;
-      }
-      .timeline-img-caption {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        z-index: 3;
-        background: rgba(44, 15, 0, 0.8);
-        padding: 4px 10px;
-        border-radius: 20px;
-        color: #ffd8a8;
-        margin: 0;
-      }
+    /* Mobile responsiveness for blob images */
+    @media (max-width: 600px) {
+      .timeline-img-wrap { width: 140px; height: 148px; }
+      .timeline-has-img { gap: 4px; }
     }
 
     #mainNavbar {
@@ -1537,13 +1373,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'EB Garamond', serif;
+      font-family: 'Playfair Display', serif;
       font-size: 16px;
       font-weight: 900;
       color: #fff;
     }
     .navbar-logo-text {
-      font-family: 'EB Garamond', serif;
+      font-family: 'Playfair Display', serif;
       font-size: 12px;
       font-weight: 700;
       color: #f7e6c4;
@@ -1662,7 +1498,7 @@
       margin-bottom: 18px;
     }
     .intro-hero-title {
-      font-family: 'EB Garamond', serif;
+      font-family: 'Playfair Display', serif;
       font-size: clamp(32px, 5vw, 62px);
       font-weight: 900;
       color: #fff;
@@ -1710,7 +1546,7 @@
       text-transform: uppercase;
     }
     .section-title {
-      font-family: 'EB Garamond', serif;
+      font-family: 'Playfair Display', serif;
       font-size: clamp(24px, 3.5vw, 38px);
       font-weight: 700;
       color: var(--primary-color);
@@ -1766,7 +1602,7 @@
     }
     .about-img-badge strong {
       display: block;
-      font-family: 'EB Garamond', serif;
+      font-family: 'Playfair Display', serif;
       font-size: 22px;
       color: #dca05f;
     }
@@ -1808,7 +1644,7 @@
       margin-bottom: 6px;
     }
     .timeline-title {
-      font-family: 'EB Garamond', serif;
+      font-family: 'Playfair Display', serif;
       font-size: 18px;
       font-weight: 700;
       color: #f0d9b5;
@@ -1849,7 +1685,7 @@
     .audio-card-icon svg { width: 30px; height: 30px; fill: #fff; }
     .audio-card-info { flex: 1; min-width: 0; }
     .audio-card-title {
-      font-family: 'EB Garamond', serif;
+      font-family: 'Playfair Display', serif;
       font-size: 20px;
       color: #f7e6c4;
       margin-bottom: 6px;
@@ -1912,7 +1748,7 @@
       color: #f7e6c4;
     }
     .map-info-title {
-      font-family: 'EB Garamond', serif;
+      font-family: 'Playfair Display', serif;
       font-size: 20px;
       color: #dca05f;
       margin-bottom: 22px;
@@ -2274,8 +2110,10 @@
   <!-- 2. MAIN APP CONTAINER -->
   <div id="appContainer">
 
-    <!-- Top Header Title (Hidden in DOM for compatibility) -->
-    <h2 id="appTitle" style="display:none;"></h2>
+    <!-- Top Header Capsule (Dynamic title) -->
+    <div class="header-capsule">
+      <h2 id="appTitle">Di Tích Lịch Sử Dinh Tỉnh Trưởng Phước Thành</h2>
+    </div>
 
     <!-- Left Menu Trigger & Actions (Only Back Button remains) -->
     <div class="left-menu-container">
@@ -2317,15 +2155,8 @@
     ></model-viewer>
 
     <!-- Room Panel (floating over 3D model) -->
-    <div id="roomPanel" class="collapsed-mobile" style="display:none;">
-      <div class="room-panel-header" onclick="toggleRoomPanel()">
-        <span data-vi="CHỌN PHÒNG TRƯNG BÀY" data-en="SELECT EXHIBITION ROOM">CHỌN PHÒNG TRƯNG BÀY</span>
-        <button class="room-panel-toggle-btn" aria-label="Toggle panel">
-          <svg style="width: 14px; height: 14px; fill: currentColor; transition: transform 0.3s;" viewBox="0 0 24 24">
-            <path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/>
-          </svg>
-        </button>
-      </div>
+    <div id="roomPanel" style="display:none;">
+      <div class="room-panel-header">CHỌN PHÒNG TRƯNG BÀY</div>
       <div class="room-panel-list">
         <button class="room-panel-btn" onclick="loadRoomScreen(1)">
           <span class="rpb-num">01</span>
