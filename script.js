@@ -1065,27 +1065,22 @@ if (modelViewerEl) {
       
       if (!scene) return; // Tiếp tục chờ ở chu kỳ sau
 
-      // 2. Tìm model root group chứa GLB model
-      let modelRoot = null;
-      for (let i = 0; i < scene.children.length; i++) {
-        const child = scene.children[i];
-        let hasMesh = false;
-        child.traverse(c => { if (c.isMesh) hasMesh = true; });
-        if (hasMesh) {
-          modelRoot = child;
-          break;
-        }
-      }
-      if (!modelRoot) return; // Tiếp tục chờ
-
-      // 3. Tìm mesh chính của mô hình Dinh (bỏ qua bức tường che nếu đã dựng)
+      // 2. Tìm mesh chính của mô hình Dinh bằng cách duyệt toàn bộ scene (bỏ qua bức tường che nếu đã dựng)
       let mainMesh = null;
       scene.traverse((child) => {
         if (child.isMesh && child.name !== "backWallCover") {
           mainMesh = child;
         }
       });
+
+      if (attempts % 5 === 0) {
+        console.log(`[THREE.JS DEBUG] Attempt: ${attempts}, mainMesh: ${mainMesh ? "Found (" + mainMesh.name + ")" : "Null"}`);
+      }
+
       if (!mainMesh) return; // Tiếp tục chờ
+
+      // Lấy group chứa mesh làm modelRoot
+      const modelRoot = mainMesh.parent || scene;
 
       // Khi đã tìm thấy cả scene, modelRoot và mainMesh: dừng quét và tiến hành xử lý
       clearInterval(initInterval);
