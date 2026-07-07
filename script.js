@@ -1041,20 +1041,21 @@ if (modelViewerEl) {
     }
   });
 
-  // Tải Three.js: xóa mái che mặt sau + tạo bức tường mỏng che phủ mặt sau dinh
-  modelViewerEl.addEventListener('load', () => {
+  // Hàm khởi tạo và can thiệp Three.js cho mặt sau mô hình 3D
+  const initThreeJS = () => {
     try {
       // Truy cập Three.js scene từ model-viewer qua Symbol nội bộ
       const sceneSymbol = Object.getOwnPropertySymbols(modelViewerEl).find(s => s.description === 'scene');
       const scene = sceneSymbol ? modelViewerEl[sceneSymbol] : null;
       
       if (!scene) {
-        console.warn("[THREE.JS] Không tìm thấy Three.js scene trên model-viewer.");
+        console.warn("[THREE.JS] Không tìm thấy Three.js scene trên model-viewer. Thử lại sau...");
+        // Nếu chưa tìm thấy scene (thỉnh thoảng xảy ra khi render chưa xong hẳn), thử lại sau 100ms
+        setTimeout(initThreeJS, 100);
         return;
       }
 
       // Tìm model root group - node gốc chứa toàn bộ mô hình GLB
-      // để làm việc trực tiếp trong hệ tọa độ gốc của mô hình (model space)
       let modelRoot = null;
       for (let i = 0; i < scene.children.length; i++) {
         const child = scene.children[i];
@@ -1138,6 +1139,16 @@ if (modelViewerEl) {
     } catch (e) {
       console.error("[THREE.JS Error] Không thể xử lý mặt sau:", e);
     }
-  });
-}
+  };
 
+  // Kiểm tra nếu mô hình đã tải xong từ trước (do cache hoặc load nhanh), khởi chạy ngay lập tức
+  if (modelViewerEl.loaded) {
+    console.log("[THREE.JS] Model đã load xong từ trước, khởi tạo Three.js ngay.");
+    initThreeJS();
+  } else {
+    modelViewerEl.addEventListener('load', () => {
+      console.log("[THREE.JS] Sự kiện load kích hoạt, khởi tạo Three.js.");
+      initThreeJS();
+    });
+  }
+}
