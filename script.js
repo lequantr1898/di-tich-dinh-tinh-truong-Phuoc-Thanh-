@@ -3,9 +3,16 @@ console.log("[DEBUG] script.js loaded and executing!");
 const ROOM_DATABASE = {
   1: {
     name: "Phòng trưng bày 01",
+    subtitle: "Phú Giáo trên đường phát triển",
+    views: [],
+    artifacts: [],
+    available: false
+  },
+  2: {
+    name: "Phòng trưng bày 02",
     subtitle: "Quê hương, đất nước, con người và cuộc đấu tranh chống thực dân Pháp",
     views: [
-      "anhphong1/anhtoanphong/anhtoanphong1.1.png"
+      "anhphong1/anhtoanphong1/anhtoanphong1.1.png"
     ],
     audio: "audiophong1.mp3",
     description: `
@@ -27,22 +34,15 @@ const ROOM_DATABASE = {
         `,
         // Chỉ chứa ảnh của hiện vật đó (chỉ chứa duy nhất ảnh sa bàn)
         images: [
-          "anhphong1/anhienvat/anhsaban.png"
+          "anhphong1/anhienvat1/anhsaban.png"
         ]
       }
     ],
     available: true
   },
-  2: {
-    name: "Phòng trưng bày 02",
-    subtitle: "Dân – Quân Phú Giáo trong cuộc kháng chiến chống Mỹ",
-    views: [],
-    artifacts: [],
-    available: false
-  },
   3: {
     name: "Phòng trưng bày 03",
-    subtitle: "Phú Giáo trên đường phát triển",
+    subtitle: "Dân – Quân Phú Giáo trong cuộc kháng chiến chống Mỹ",
     views: [],
     artifacts: [],
     available: false
