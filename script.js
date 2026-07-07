@@ -1,3 +1,4 @@
+console.log("[DEBUG] script.js loaded and executing!");
 // ===== CONFIGURING STATIC APP DATA =====
 const ROOM_DATABASE = {
   1: {
@@ -1042,21 +1043,22 @@ if (modelViewerEl) {
     }
   });
 
-  // Hàm khởi tạo và can thiệp Three.js cho mặt sau mô hình 3D
-  const initThreeJS = () => {
+  // Vòng lặp kiểm tra thông minh để xử lý mô hình Three.js (Tránh lỗi cache, display:none trì hoãn load)
+  let attempts = 0;
+  const initInterval = setInterval(() => {
+    attempts++;
+    if (attempts > 300) { // Giới hạn 60 giây quét
+      clearInterval(initInterval);
+      return;
+    }
+
     try {
-      // Truy cập Three.js scene từ model-viewer qua Symbol nội bộ
+      // 1. Tìm Scene Symbol nội bộ của model-viewer
       const sceneSymbol = Object.getOwnPropertySymbols(modelViewerEl).find(s => s.description === 'scene');
       const scene = sceneSymbol ? modelViewerEl[sceneSymbol] : null;
-      
-      if (!scene) {
-        console.warn("[THREE.JS] Không tìm thấy Three.js scene trên model-viewer. Thử lại sau...");
-        // Nếu chưa tìm thấy scene (thỉnh thoảng xảy ra khi render chưa xong hẳn), thử lại sau 100ms
-        setTimeout(initThreeJS, 100);
-        return;
-      }
+      if (!scene) return; // Tiếp tục chờ ở chu kỳ sau
 
-      // Tìm model root group - node gốc chứa toàn bộ mô hình GLB
+      // 2. Tìm model root group chứa GLB model
       let modelRoot = null;
       for (let i = 0; i < scene.children.length; i++) {
         const child = scene.children[i];
@@ -1067,23 +1069,20 @@ if (modelViewerEl) {
           break;
         }
       }
-      if (!modelRoot) modelRoot = scene;
+      if (!modelRoot) return; // Tiếp tục chờ
 
-      scene.updateMatrixWorld(true);
-
-      // Tìm mesh chính của mô hình (bỏ qua bức tường che nếu đã tồn tại)
+      // 3. Tìm mesh chính của mô hình Dinh (bỏ qua bức tường che nếu đã dựng)
       let mainMesh = null;
       scene.traverse((child) => {
         if (child.isMesh && child.name !== "backWallCover") {
           mainMesh = child;
         }
       });
+      if (!mainMesh) return; // Tiếp tục chờ
 
-      if (!mainMesh) {
-        console.warn("[THREE.JS] Chưa tìm thấy Mesh chính của mô hình. Thử lại sau...");
-        setTimeout(initThreeJS, 100);
-        return;
-      }
+      // Khi đã tìm thấy cả scene, modelRoot và mainMesh: dừng quét và tiến hành xử lý
+      clearInterval(initInterval);
+      console.log(`[THREE.JS] Đã tìm thấy mesh chính: ${mainMesh.name}. Bắt đầu xử lý mặt sau...`);
 
       // === BƯỚC 1: XÓA/SAN PHẲNG MÁI CHE MẶT SAU (GIỐNG DINH TỈNH TRƯỞNG) ===
       const geometry = mainMesh.geometry;
@@ -1103,7 +1102,7 @@ if (modelViewerEl) {
       }
       position.needsUpdate = true;
       geometry.computeVertexNormals();
-      console.log(`[THREE.JS] Đã san phẳng các đỉnh nhô ra phía sau của mesh: ${mainMesh.name}`);
+      console.log(`[THREE.JS] Đã san phẳng các đỉnh nhô ra phía sau.`);
 
       // === BƯỚC 2: TẠO BỨC TƯỜNG MỎNG CHE MẶT SAU (GIỐNG DINH TỈNH TRƯỞNG) ===
       geometry.computeBoundingBox();
@@ -1143,17 +1142,7 @@ if (modelViewerEl) {
 
     } catch (e) {
       console.error("[THREE.JS Error] Không thể xử lý mặt sau:", e);
+      clearInterval(initInterval);
     }
-  };
-
-  // Kiểm tra nếu mô hình đã tải xong từ trước (do cache hoặc load nhanh), khởi chạy ngay lập tức
-  if (modelViewerEl.loaded) {
-    console.log("[THREE.JS] Model đã load xong từ trước, khởi tạo Three.js ngay.");
-    initThreeJS();
-  } else {
-    modelViewerEl.addEventListener('load', () => {
-      console.log("[THREE.JS] Sự kiện load kích hoạt, khởi tạo Three.js.");
-      initThreeJS();
-    });
-  }
+  }, 200);
 }
