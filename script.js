@@ -1030,6 +1030,7 @@ map.on('click', function (e) {
 
 // Gắn sự kiện click-to-log để hỗ trợ đo đạc toạ độ 3D thực tế
 const modelViewerEl = document.getElementById('dinhModel');
+
 if (modelViewerEl) {
   modelViewerEl.addEventListener('click', (event) => {
     const rect = modelViewerEl.getBoundingClientRect();
@@ -1078,60 +1079,64 @@ if (modelViewerEl) {
         }
       });
 
-      if (mainMesh) {
-        // === BƯỚC 1: XÓA/SAN PHẲNG MÁI CHE MẶT SAU (GIỐNG DINH TỈNH TRƯỞNG) ===
-        const geometry = mainMesh.geometry;
-        const position = geometry.attributes.position;
-        const tempV = new THREE.Vector3();
-
-        for (let i = 0; i < position.count; i++) {
-          tempV.fromBufferAttribute(position, i);
-
-          // Điều kiện local tương đương:
-          // local Y < -0.186 (tương đương thế giới Y < 6.7)
-          // local Z < -0.473 (tương đương thế giới Z < -5.0)
-          if (tempV.y < -0.186 && tempV.z < -0.473) {
-            tempV.z = -0.473; // San phẳng về mặt phẳng local Z = -0.473
-            position.setXYZ(i, tempV.x, tempV.y, tempV.z);
-          }
-        }
-        position.needsUpdate = true;
-        geometry.computeVertexNormals();
-        console.log(`[THREE.JS] Đã san phẳng các đỉnh nhô ra phía sau của mesh: ${mainMesh.name}`);
-
-        // === BƯỚC 2: TẠO BỨC TƯỜNG MỎNG CHE MẶT SAU (GIỐNG DINH TỈNH TRƯỞNG) ===
-        geometry.computeBoundingBox();
-        const localSize = geometry.boundingBox.getSize(new THREE.Vector3());
-
-        // Chiều rộng tường = 94% chiều rộng phủ bì của model local
-        const localWallW = localSize.x * 0.94;
-        const localWallH = 0.582; // Chiều cao từ mép chậu cây lên (world 6.15m)
-        const localWallD = 0.005; // Độ dày tường mỏng (world 0.05m)
-
-        const coverWallGeo = new THREE.BoxGeometry(localWallW, localWallH, localWallD);
-        const coverWallMat = new THREE.MeshStandardMaterial({
-          color: 0xE7D5BC, // Tông màu kem ấm giống mặt tiền dinh ở dinh-tinh-truong
-          roughness: 0.9,
-          metalness: 0.05,
-          side: THREE.DoubleSide
-        });
-        const coverWall = new THREE.Mesh(coverWallGeo, coverWallMat);
-        coverWall.name = "backWallCover";
-
-        // Vị trí định vị local chuẩn: Z = -0.476 (world -5.03), Y = -0.478 (world 0.55 + H/2)
-        coverWall.position.set(0, -0.478, -0.476);
-        coverWall.castShadow = true;
-        coverWall.receiveShadow = true;
-
-        // Xóa tường cũ nếu có trước khi thêm mới
-        const oldWall = modelRoot.getObjectByName("backWallCover");
-        if (oldWall) {
-          modelRoot.remove(oldWall);
-        }
-
-        modelRoot.add(coverWall);
-        console.log("[THREE.JS] Đã tạo thành công bức tường mỏng che phủ mặt sau giống dinh-tinh-truong.");
+      if (!mainMesh) {
+        console.warn("[THREE.JS] Chưa tìm thấy Mesh chính của mô hình. Thử lại sau...");
+        setTimeout(initThreeJS, 100);
+        return;
       }
+
+      // === BƯỚC 1: XÓA/SAN PHẲNG MÁI CHE MẶT SAU (GIỐNG DINH TỈNH TRƯỞNG) ===
+      const geometry = mainMesh.geometry;
+      const position = geometry.attributes.position;
+      const tempV = new THREE.Vector3();
+
+      for (let i = 0; i < position.count; i++) {
+        tempV.fromBufferAttribute(position, i);
+
+        // Điều kiện local tương đương:
+        // local Y < -0.186 (tương đương thế giới Y < 6.7)
+        // local Z < -0.473 (tương đương thế giới Z < -5.0)
+        if (tempV.y < -0.186 && tempV.z < -0.473) {
+          tempV.z = -0.473; // San phẳng về mặt phẳng local Z = -0.473
+          position.setXYZ(i, tempV.x, tempV.y, tempV.z);
+        }
+      }
+      position.needsUpdate = true;
+      geometry.computeVertexNormals();
+      console.log(`[THREE.JS] Đã san phẳng các đỉnh nhô ra phía sau của mesh: ${mainMesh.name}`);
+
+      // === BƯỚC 2: TẠO BỨC TƯỜNG MỎNG CHE MẶT SAU (GIỐNG DINH TỈNH TRƯỞNG) ===
+      geometry.computeBoundingBox();
+      const localSize = geometry.boundingBox.getSize(new THREE.Vector3());
+
+      // Chiều rộng tường = 94% chiều rộng phủ bì của model local
+      const localWallW = localSize.x * 0.94;
+      const localWallH = 0.582; // Chiều cao từ mép chậu cây lên (world 6.15m)
+      const localWallD = 0.005; // Độ dày tường mỏng (world 0.05m)
+
+      const coverWallGeo = new THREE.BoxGeometry(localWallW, localWallH, localWallD);
+      const coverWallMat = new THREE.MeshStandardMaterial({
+        color: 0xE7D5BC, // Tông màu kem ấm giống mặt tiền dinh ở dinh-tinh-truong
+        roughness: 0.9,
+        metalness: 0.05,
+        side: THREE.DoubleSide
+      });
+      const coverWall = new THREE.Mesh(coverWallGeo, coverWallMat);
+      coverWall.name = "backWallCover";
+
+      // Vị trí định vị local chuẩn: Z = -0.476 (world -5.03), Y = -0.478 (world 0.55 + H/2)
+      coverWall.position.set(0, -0.478, -0.476);
+      coverWall.castShadow = true;
+      coverWall.receiveShadow = true;
+
+      // Xóa tường cũ nếu có trước khi thêm mới
+      const oldWall = modelRoot.getObjectByName("backWallCover");
+      if (oldWall) {
+        modelRoot.remove(oldWall);
+      }
+
+      modelRoot.add(coverWall);
+      console.log("[THREE.JS] Đã tạo thành công bức tường mỏng che phủ mặt sau giống dinh-tinh-truong.");
 
       // Yêu cầu model-viewer render lại khung hình
       modelViewerEl.requestUpdate();
