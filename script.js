@@ -1517,3 +1517,22 @@ if (modelViewerEl) {
     }
   }, 200);
 }
+
+// ===== TOGGLE ROOM SELECTION PANEL (COLLAPSE/EXPAND) =====
+function toggleRoomPanel() {
+  const panel = document.getElementById("roomPanel");
+  if (!panel) return;
+  panel.classList.toggle("collapsed");
+  
+  const iconPath = document.getElementById("roomPanelTogglePath");
+  if (iconPath) {
+    if (panel.classList.contains("collapsed")) {
+      // Down arrow for collapsed state
+      iconPath.setAttribute("d", "M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z");
+    } else {
+      // Up arrow for expanded state
+      iconPath.setAttribute("d", "M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z");
+    }
+  }
+}
+

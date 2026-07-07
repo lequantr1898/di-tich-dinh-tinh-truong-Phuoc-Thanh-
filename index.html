@@ -318,33 +318,40 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 50px;
-      height: 90px;
-      background-color: rgba(255, 255, 255, 0.18);
-      border: none;
-      backdrop-filter: blur(4px);
+      width: 48px;
+      height: 48px;
+      background-color: #bd3107;
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
       color: #ffffff;
-      font-size: 38px;
+      font-size: 26px;
+      font-weight: bold;
       display: flex;
       align-items: center;
       justify-content: center;
+      border-radius: 50%;
       cursor: pointer;
-      z-index: 999;
-      transition: background-color 0.2s, opacity 0.3s;
-      border-radius: 0 10px 10px 0;
+      z-index: 9999;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .room-arrow.arrow-left {
+      left: 20px;
     }
 
     .room-arrow.arrow-right {
-      right: 0;
-      border-radius: 10px 0 0 10px;
+      right: 20px;
     }
 
     .room-arrow:hover {
-      background-color: rgba(255, 255, 255, 0.35);
+      background-color: #8c2303;
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
     }
 
     .room-arrow:active {
-      transform: translateY(-50%) scale(0.96);
+      transform: translateY(-50%) scale(0.95);
     }
 
     /* Custom Zoom Controls matching design */
@@ -1058,19 +1065,84 @@
         padding: 16px;
         font-size: 13.5px;
       }
-      /* Room Panel mobile: bottom bar */
-      #roomPanel {
-        left: 0; right: 0;
-        top: auto;
-        bottom: 0;
-        transform: none;
-        width: 100%;
-        border-radius: 14px 14px 0 0;
-        max-height: 45vh;
-        overflow-y: auto;
+      /* Room Panel mobile: vertical block section before 3D model */
+      #appContainer.active {
+        display: flex !important;
+        flex-direction: column !important;
+        height: 100vh !important;
+        padding-top: 60px !important;
+        position: relative !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
       }
-      .room-panel-list { flex-direction: row; flex-wrap: wrap; }
-      .room-panel-btn { flex: 1 1 calc(50% - 8px); min-width: 120px; }
+      model-viewer#dinhModel {
+        flex: 1 !important;
+        min-height: 0 !important;
+        order: 2 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+      #map {
+        flex: 1 !important;
+        min-height: 0 !important;
+        order: 3 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+      #roomPanel {
+        position: relative !important;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        width: 100% !important;
+        max-height: none !important;
+        overflow-y: visible !important;
+        border-radius: 0 !important;
+        border-left: none !important;
+        border-right: none !important;
+        border-top: none !important;
+        border-bottom: 2px solid rgba(139, 107, 67, 0.25) !important;
+        box-shadow: none !important;
+        order: 1 !important;
+        margin: 0 !important;
+        background: #fdf8ec !important;
+      }
+      #roomPanel.collapsed .room-panel-list {
+        display: none !important;
+      }
+      .room-panel-list {
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 0 !important;
+      }
+      .room-panel-btn {
+        flex: none !important;
+        width: 100% !important;
+        padding: 10px 16px !important;
+        border-bottom: 1px solid rgba(139, 107, 67, 0.1) !important;
+      }
+      .room-panel-btn:last-child {
+        border-bottom: none !important;
+      }
+      .rpb-num {
+        font-size: 16px !important;
+      }
+      .rpb-text {
+        font-size: 11px !important;
+      }
+      .room-arrow {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 22px !important;
+      }
+      .room-arrow.arrow-left {
+        left: 10px !important;
+      }
+      .room-arrow.arrow-right {
+        right: 10px !important;
+      }
 
       /* Gallery mobile: vertical stack */
       .intro-gallery-section { height: auto; }
@@ -1095,49 +1167,72 @@
       top: 50%;
       transform: translateY(-50%);
       z-index: 2000;
-      background: rgba(20, 6, 0, 0.88);
+      background: rgba(253, 248, 236, 0.96);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(220,160,95,0.3);
+      border: 1.5px solid rgba(139, 107, 67, 0.35);
       border-radius: 14px;
       overflow: hidden;
-      width: 240px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      width: 260px;
+      box-shadow: 0 15px 45px rgba(0,0,0,0.25);
     }
     .room-panel-header {
-      background: linear-gradient(135deg,#5a1a00,#ab2d0a);
-      color: #f7e6c4;
-      font-size: 10px;
+      background: linear-gradient(135deg, #78290f, #bd3107);
+      color: #fffae8;
+      font-size: 11px;
       font-weight: 800;
-      letter-spacing: 0.18em;
-      padding: 10px 16px;
+      letter-spacing: 0.16em;
+      padding: 12px 16px;
       text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      cursor: pointer;
+      user-select: none;
+    }
+    .room-panel-toggle-btn {
+      position: absolute;
+      right: 12px;
+      background: none;
+      border: none;
+      color: inherit;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      border-radius: 50%;
+      transition: background-color 0.2s;
+    }
+    .room-panel-toggle-btn:hover {
+      background-color: rgba(255, 255, 255, 0.15);
     }
     .room-panel-list { display: flex; flex-direction: column; }
     .room-panel-btn {
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 12px 16px;
+      gap: 12px;
+      padding: 14px 16px;
       background: none;
       border: none;
-      border-bottom: 1px solid rgba(220,160,95,0.1);
-      color: #f7e6c4;
+      border-bottom: 1.5px solid rgba(139, 107, 67, 0.15);
+      color: #5c351f;
       cursor: pointer;
       transition: background 0.2s;
       text-align: left;
     }
     .room-panel-btn:last-child { border-bottom: none; }
-    .room-panel-btn:hover { background: rgba(220,160,95,0.15); }
+    .room-panel-btn:hover { background: rgba(139, 107, 67, 0.12); color: #ab2d0a; }
     .rpb-num {
       font-family: 'Playfair Display', serif;
-      font-size: 18px;
+      font-size: 19px;
       font-weight: 900;
-      color: #dca05f;
+      color: #bd3107;
       min-width: 28px;
     }
-    .rpb-text { font-size: 11px; font-weight: 500; line-height: 1.3; flex: 1; }
-    .rpb-arrow { font-size: 18px; color: #dca05f; opacity: 0.6; }
+    .rpb-text { font-size: 11.5px; font-weight: 600; line-height: 1.4; flex: 1; color: #5c351f; }
+    .rpb-arrow { font-size: 18px; color: #bd3107; opacity: 0.8; }
 
     /* ===== PHOTO GALLERY STRIP ===== */
     .intro-gallery-section {
@@ -1425,6 +1520,13 @@
       background: rgba(220,160,95,0.18);
     }
     .nav-link.active { color: #dca05f; }
+
+    .nav-text-desktop {
+      display: inline;
+    }
+    .nav-text-mobile {
+      display: none;
+    }
     .navbar-right {
       display: flex;
       align-items: center;
@@ -1850,20 +1952,50 @@
 
     /* Mobile responsive for intro */
     @media (max-width: 768px) {
-      #mainNavbar { padding: 0 16px; }
-      .navbar-logo-text { display: none; }
-      .navbar-links { display: none; gap: 0; }
-      .navbar-links.mobile-open {
-        display: flex;
-        flex-direction: column;
-        position: fixed;
-        top: 60px; left: 0; right: 0;
-        background: rgba(30,6,0,0.97);
-        padding: 16px;
-        gap: 4px;
-        z-index: 8999;
+      #mainNavbar {
+        padding: 0 8px !important;
+        justify-content: space-between !important;
       }
-      .navbar-hamburger { display: flex; }
+      .navbar-logo {
+        display: none !important;
+      }
+      .navbar-hamburger {
+        display: none !important;
+      }
+      .navbar-links {
+        display: flex !important;
+        flex-direction: row !important;
+        position: static !important;
+        background: none !important;
+        padding: 0 !important;
+        gap: 3px !important;
+        z-index: auto !important;
+        flex-grow: 1;
+        justify-content: flex-start;
+      }
+      .nav-link {
+        font-size: 11.5px !important;
+        padding: 6px 8.5px !important;
+        white-space: nowrap !important;
+        letter-spacing: 0.02em !important;
+      }
+      .nav-text-desktop {
+        display: none !important;
+      }
+      .nav-text-mobile {
+        display: inline !important;
+      }
+      .navbar-right {
+        margin-left: auto;
+        display: flex !important;
+      }
+      .lang-toggle {
+        border-radius: 12px;
+      }
+      .lang-btn {
+        font-size: 10px !important;
+        padding: 4px 6px !important;
+      }
       .intro-hero-content { padding: 0 20px; }
       .intro-container { padding: 0 20px; }
       .intro-section { padding: 56px 0; }
@@ -1887,9 +2019,18 @@
       <span></span><span></span><span></span>
     </button>
     <div class="navbar-links" id="navLinks">
-      <button class="nav-link active" id="navIntro" onclick="navigateToIntro()" data-vi="Giới Thiệu" data-en="Overview">Giới Thiệu</button>
-      <button class="nav-link" id="navMap" onclick="navigateToMap()" data-vi="Sơ Đồ Di Tích" data-en="Site Map">Sơ Đồ Di Tích</button>
-      <button class="nav-link" id="navProject" onclick="viewProjectDetails()" data-vi="Thông Tin Dự Án" data-en="Project Info">Thông Tin Dự Án</button>
+      <button class="nav-link active" id="navIntro" onclick="navigateToIntro()">
+        <span class="nav-text-desktop" data-vi="Giới Thiệu" data-en="Overview">Giới Thiệu</span>
+        <span class="nav-text-mobile" data-vi="Giới thiệu" data-en="Overview">Giới thiệu</span>
+      </button>
+      <button class="nav-link" id="navMap" onclick="navigateToMap()">
+        <span class="nav-text-desktop" data-vi="Sơ Đồ Di Tích" data-en="Site Map">Sơ Đồ Di Tích</span>
+        <span class="nav-text-mobile" data-vi="Sơ đồ" data-en="Site Map">Sơ đồ</span>
+      </button>
+      <button class="nav-link" id="navProject" onclick="viewProjectDetails()">
+        <span class="nav-text-desktop" data-vi="Thông Tin Dự Án" data-en="Project Info">Thông Tin Dự Án</span>
+        <span class="nav-text-mobile" data-vi="Thông tin" data-en="Project Info">Thông tin</span>
+      </button>
     </div>
     <div class="navbar-right">
       <div class="lang-toggle">
@@ -2169,9 +2310,15 @@
       style="display:none; width:100%; height:100%; background:radial-gradient(ellipse at 60% 40%, #1a0a00 0%, #0a0300 100%);"
     ></model-viewer>
 
-    <!-- Room Panel (floating over 3D model) -->
     <div id="roomPanel" style="display:none;">
-      <div class="room-panel-header">CHỌN PHÒNG TRƯNG BÀY</div>
+      <div class="room-panel-header" onclick="toggleRoomPanel()">
+        <span data-vi="CHỌN PHÒNG TRƯNG BÀY" data-en="SELECT EXHIBITION ROOM">CHỌN PHÒNG TRƯNG BÀY</span>
+        <button id="roomPanelToggleBtn" class="room-panel-toggle-btn" aria-label="Toggle collapse">
+          <svg viewBox="0 0 24 24" width="16" height="16">
+            <path id="roomPanelTogglePath" d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
       <div class="room-panel-list">
         <button class="room-panel-btn" onclick="loadRoomScreen(1)">
           <span class="rpb-num">01</span>
