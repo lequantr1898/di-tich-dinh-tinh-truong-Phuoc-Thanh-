@@ -12,29 +12,51 @@ const ROOM_DATABASE = {
     name: "Phòng trưng bày 02",
     subtitle: "Quê hương, đất nước, con người và cuộc đấu tranh chống thực dân Pháp",
     views: [
-      "anhphong1/anhtoanphong1/anhtoanphong1.1.png"
+      "anhphong2/anhtoanphong2/anhtoanphong2.1.JPG",
+      "anhphong2/anhtoanphong2/anhtoanphong2.2.png",
+      "anhphong2/anhtoanphong2/anhtoanphong2.3.png"
     ],
-    audio: "audiophong1.mp3",
+    audio: "",
     description: `
-      <p>Tại đây trưng bày một số hình ảnh, hiện vật về quá trình hình thành và phát triển của một vùng đất và con người Phước Thành xưa, Phú Giáo hôm nay.</p>
-      <p>Đặc biệt là từ khi tái lập huyện Phú Giáo đến nay. Từ một huyện nghèo khó, vùng sâu, vùng xa của tỉnh Bình Dương vươn lên phát triển mạnh mẽ theo hướng công nghiệp hóa hiện đại hóa...</p>
-      <p>Năm 2019 Đảng bộ, chính quyền và nhân dân huyện Phú Giáo được Chủ tịch nước CHXHCNVN tặng Huân chương Lao động hạng nhất.</p>
+      <p>Tại đây trưng bày một số tài liệu, bản đồ, hình ảnh và hiện vật tiêu biểu về quê hương, đất nước, con người Phú Giáo cùng cuộc đấu tranh bền bỉ chống thực dân Pháp xâm lược.</p>
     `,
     artifacts: [
       {
-        id: "saban_phuocthanh",
-        name: "Sa Bàn Cảnh Quan Trận Tấn Công Tiểu Khu Phước Thành (18/9/1961)",
-        // Position on 1920x1080 resolution for room overview image
-        xRatio: 0.3551,
-        yRatio: 0.7306,
+        id: "room2_marker1",
+        name: "Hiện vật trưng bày phòng 2 - Nhóm 1",
+        viewIndex: 1,
+        xRatio: 0.615,
+        yRatio: 0.505,
         audio: "",
         description: `
-          <p>Hiện vật: Sa bàn cảnh quan trận tấn công tiểu khu Phước Thành (18/9/1961).</p>
-          <p>Thông tin chi tiết của hiện vật đang được cập nhật...</p>
+          <p>Tài liệu, bản đồ giới thiệu về dân cư và địa bàn hoạt động. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
         `,
-        // Chỉ chứa ảnh của hiện vật đó (chỉ chứa duy nhất ảnh sa bàn)
         images: [
-          "anhphong1/anhienvat1/anhsaban.png"
+          "anhphong2/anhhienvat2/anhhienvat2.1.JPG",
+          "anhphong2/anhhienvat2/anhhienvat2.2.JPG",
+          "anhphong2/anhhienvat2/anhhienvat2.3.JPG",
+          "anhphong2/anhhienvat2/anhhienvat2.4.JPG",
+          "anhphong2/anhhienvat2/anhhienvat2.5.JPG",
+          "anhphong2/anhhienvat2/anhhienvat2.6.JPG"
+        ]
+      },
+      {
+        id: "room2_marker2",
+        name: "Hiện vật trưng bày phòng 2 - Nhóm 2",
+        viewIndex: 2,
+        xRatio: 0.499,
+        yRatio: 0.450,
+        audio: "",
+        description: `
+          <p>Tranh vẽ tư liệu lịch sử và tủ trưng bày khí giới tự tạo thời kỳ kháng chiến chống Pháp. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        images: [
+          "anhphong2/anhhienvat2/anhhienvat2.7.JPG",
+          "anhphong2/anhhienvat2/anhhienvat2.8.JPG",
+          "anhphong2/anhhienvat2/anhhienvat2.9.JPG",
+          "anhphong2/anhhienvat2/anhhienvat2.10.JPG",
+          "anhphong2/anhhienvat2/anhhienvat2.11.JPG",
+          "anhphong2/anhhienvat2/anhhienvat2.12.JPG"
         ]
       }
     ],
