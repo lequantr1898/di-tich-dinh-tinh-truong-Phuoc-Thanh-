@@ -50,9 +50,95 @@ const ROOM_DATABASE = {
   4: {
     name: "Phòng trưng bày 04",
     subtitle: "Khu Trù Mật - Ấp chiến lược kiểu mới của Mỹ - Ngụy",
-    views: [],
-    artifacts: [],
-    available: false
+    views: [
+      "anhphong4/anhtoanphong4/anhtoanphong4.1.JPG",
+      "anhphong4/anhtoanphong4/anhtoanphong4.2.png",
+      "anhphong4/anhtoanphong4/anhtoanphong4.3.JPG"
+    ],
+    audio: "",
+    description: `
+      <p>Tại đây trưng bày một số hình ảnh, hiện vật về Khu Trù Mật và Ấp chiến lược kiểu mới của Mỹ - Ngụy tại Phước Thành xưa.</p>
+    `,
+    artifacts: [
+      {
+        id: "room4_marker1",
+        name: "Hiện vật trưng bày phòng 4 - Nhóm 1",
+        viewIndex: 0,
+        xRatio: 0.347,
+        yRatio: 0.555,
+        audio: "",
+        description: `
+          <p>Mẫu hiện vật thuộc tủ trưng bày số 1 phòng 4. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        images: [
+          "anhphong4/anhhienvat4/anhhienvat4.5.JPG",
+          "anhphong4/anhhienvat4/anhhienvat4.6.JPG",
+          "anhphong4/anhhienvat4/anhhienvat4.7.JPG",
+          "anhphong4/anhhienvat4/anhhienvat4.8.JPG",
+          "anhphong4/anhhienvat4/anhhienvat4.9.JPG"
+        ]
+      },
+      {
+        id: "room4_marker2",
+        name: "Hiện vật trưng bày phòng 4 - Nhóm 2",
+        viewIndex: 0,
+        xRatio: 0.573,
+        yRatio: 0.540,
+        audio: "",
+        description: `
+          <p>Mẫu hiện vật thuộc khu vực trưng bày số 2 phòng 4. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        images: [
+          "anhphong4/anhhienvat4/anhhienvat4.1.JPG",
+          "anhphong4/anhhienvat4/anhhienvat4.2.JPG",
+          "anhphong4/anhhienvat4/anhhienvat4.3.JPG",
+          "anhphong4/anhhienvat4/anhhienvat4.4.JPG"
+        ]
+      },
+      {
+        id: "room4_marker3",
+        name: "Hiện vật trưng bày phòng 4 - Nhóm 3",
+        viewIndex: 0,
+        xRatio: 0.771,
+        yRatio: 0.574,
+        audio: "",
+        description: `
+          <p>Mẫu hiện vật thuộc tủ trưng bày số 3 phòng 4. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        images: [
+          "anhphong4/anhhienvat4/anhhienvat4.23.JPG",
+          "anhphong4/anhhienvat4/anhhienvat4.24.JPG",
+          "anhphong4/anhhienvat4/anhhienvat4.25.JPG"
+        ]
+      },
+      {
+        id: "room4_marker4",
+        name: "Hiện vật trưng bày phòng 4 - Nhóm 4",
+        viewIndex: 1,
+        xRatio: 0.608,
+        yRatio: 0.570,
+        audio: "",
+        description: `
+          <p>Các tư liệu, hình ảnh lịch sử thuộc khu vực trưng bày số 4 phòng 4. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        images: [
+          "anhphong4/anhhienvat4/anhhienvat4.10.JPG",
+          "anhphong4/anhhienvat4/anhhienvat4.11.JPG",
+          "anhphong4/anhhienvat4/anhhienvat4.12.JPG",
+          "anhphong4/anhhienvat4/anhhienvat4.13.JPG",
+          "anhphong4/anhhienvat4/anhhienvat4.14.JPG",
+          "anhphong4/anhhienvat4/anhhienvat4.15.JPG",
+          "anhphong4/anhhienvat4/anhhienvat4.16.JPG",
+          "anhphong4/anhhienvat4/anhhienvat4.17.JPG",
+          "anhphong4/anhhienvat4/anhhienvat4.18.JPG",
+          "anhphong4/anhhienvat4/anhhienvat4.19.JPG",
+          "anhphong4/anhhienvat4/anhhienvat4.20.JPG",
+          "anhphong4/anhhienvat4/anhhienvat4.21.JPG",
+          "anhphong4/anhhienvat4/anhhienvat4.22.JPG"
+        ]
+      }
+    ],
+    available: true
   },
   5: {
     name: "Phòng trưng bày 05",
@@ -300,6 +386,9 @@ function renderRoomView() {
 
     // Render Room Artifact markers
     room.artifacts.forEach(artifact => {
+      if (artifact.viewIndex !== undefined && artifact.viewIndex !== currentViewIndex) {
+        return;
+      }
       const lat = h - (artifact.yRatio * h);
       const lng = artifact.xRatio * w;
 
