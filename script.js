@@ -1053,9 +1053,16 @@ if (modelViewerEl) {
     }
 
     try {
-      // 1. Tìm Scene Symbol nội bộ của model-viewer
-      const sceneSymbol = Object.getOwnPropertySymbols(modelViewerEl).find(s => s.description === 'scene');
+      const sceneSymbol = Object.getOwnPropertySymbols(modelViewerEl).find(s => {
+        const val = modelViewerEl[s];
+        return val && (val.isScene || val.type === 'Scene');
+      });
       const scene = sceneSymbol ? modelViewerEl[sceneSymbol] : null;
+
+      if (attempts % 5 === 0) {
+        console.log(`[THREE.JS DEBUG] Attempt: ${attempts}, sceneSymbol: ${sceneSymbol ? "Found" : "Null"}, scene: ${scene ? "Found" : "Null"}`);
+      }
+      
       if (!scene) return; // Tiếp tục chờ ở chu kỳ sau
 
       // 2. Tìm model root group chứa GLB model
