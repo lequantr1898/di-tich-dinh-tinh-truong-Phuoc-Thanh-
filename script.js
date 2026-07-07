@@ -143,9 +143,147 @@ const ROOM_DATABASE = {
   5: {
     name: "Phòng trưng bày 05",
     subtitle: "Chiến thắng Phước Thành",
-    views: [],
-    artifacts: [],
-    available: false
+    views: [
+      "anhphong5/anhtoanphong5/anhtoanphong5.1.JPG",
+      "anhphong5/anhtoanphong5/anhtoanphong5.2.JPG",
+      "anhphong5/anhtoanphong5/anhtoanphong5.3.JPG",
+      "anhphong5/anhtoanphong5/anhtoanphong5.4.JPG",
+      "anhphong5/anhtoanphong5/anhtoanphong5.5.JPG"
+    ],
+    audio: "",
+    description: `
+      <p>Tại đây trưng bày một số hình ảnh, hiện vật về Chiến Thắng Phước Thành vẻ vang.</p>
+    `,
+    artifacts: [
+      {
+        id: "room5_marker1",
+        name: "Hiện vật trưng bày phòng 5 - Nhóm 1",
+        viewIndex: 0,
+        xRatio: 0.288,
+        yRatio: 0.490,
+        audio: "",
+        description: `
+          <p>Mẫu hiện vật thuộc tủ trưng bày số 1 phòng 5. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        images: [
+          "anhphong5/anhhienvat5/anhhienvat5.1.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.2.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.3.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.4.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.5.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.6.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.7.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.8.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.9.JPG"
+        ]
+      },
+      {
+        id: "room5_marker2",
+        name: "Hiện vật trưng bày phòng 5 - Nhóm 2",
+        viewIndex: 1,
+        xRatio: 0.169,
+        yRatio: 0.570,
+        audio: "",
+        description: `
+          <p>Mẫu hiện vật thuộc khu vực trưng bày số 2 phòng 5. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        images: [
+          "anhphong5/anhhienvat5/anhhienvat5.39.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.40.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.41.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.42.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.43.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.44.JPG"
+        ]
+      },
+      {
+        id: "room5_marker3",
+        name: "Hiện vật trưng bày phòng 5 - Nhóm 3",
+        viewIndex: 2,
+        xRatio: 0.228,
+        yRatio: 0.585,
+        audio: "",
+        description: `
+          <p>Mẫu hiện vật thuộc tủ trưng bày số 3 phòng 5. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        images: [
+          "anhphong5/anhhienvat5/anhhienvat5.45.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.46.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.47.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.48.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.49.JPG"
+        ]
+      },
+      {
+        id: "room5_marker4",
+        name: "Hiện vật trưng bày phòng 5 - Nhóm 4",
+        viewIndex: 3,
+        xRatio: 0.310,
+        yRatio: 0.450,
+        audio: "",
+        description: `
+          <p>Các tư liệu, hình ảnh lịch sử thuộc sa bàn hoặc mô hình trung tâm phòng 5. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        images: [
+          "anhphong5/anhhienvat5/anhhienvat5.10.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.11.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.12.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.13.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.14.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.15.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.16.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.17.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.18.JPG"
+        ]
+      },
+      {
+        id: "room5_marker5",
+        name: "Hiện vật trưng bày phòng 5 - Nhóm 5",
+        viewIndex: 3,
+        xRatio: 0.729,
+        yRatio: 0.500,
+        audio: "",
+        description: `
+          <p>Mẫu hiện vật thuộc tủ trưng bày số 5 phòng 5. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        images: [
+          "anhphong5/anhhienvat5/anhhienvat5.19.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.20.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.21.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.22.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.23.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.24.JPG"
+        ]
+      },
+      {
+        id: "room5_marker6",
+        name: "Hiện vật trưng bày phòng 5 - Nhóm 6",
+        viewIndex: 4,
+        xRatio: 0.551,
+        yRatio: 0.520,
+        audio: "",
+        description: `
+          <p>Hình ảnh, hiện vật thuộc tủ trưng bày số 6 phòng 5. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        images: [
+          "anhphong5/anhhienvat5/anhhienvat5.25.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.26.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.27.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.28.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.29.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.30.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.31.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.32.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.33.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.34.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.35.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.36.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.37.JPG",
+          "anhphong5/anhhienvat5/anhhienvat5.38.JPG"
+        ]
+      }
+    ],
+    available: true
   }
 };
 
