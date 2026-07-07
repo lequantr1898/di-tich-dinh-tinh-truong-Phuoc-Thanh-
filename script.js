@@ -1069,12 +1069,17 @@ if (modelViewerEl) {
 
       scene.updateMatrixWorld(true);
 
-      // === BƯỚC 1: XÓA/SAN PHẲNG MÁI CHE MẶT SAU (GIỐNG DINH TỈNH TRƯỞNG) ===
-      // Flatten các chi tiết, cột và mái che thừa ở mặt sau về mặt phẳng z = -5.0 (local z = -0.473)
+      // Tìm mesh chính của mô hình (bỏ qua bức tường che nếu đã tồn tại)
+      let mainMesh = null;
       scene.traverse((child) => {
-        if (!child.isMesh) return;
-        
-        const geometry = child.geometry;
+        if (child.isMesh && child.name !== "backWallCover") {
+          mainMesh = child;
+        }
+      });
+
+      if (mainMesh) {
+        // === BƯỚC 1: XÓA/SAN PHẲNG MÁI CHE MẶT SAU (GIỐNG DINH TỈNH TRƯỞNG) ===
+        const geometry = mainMesh.geometry;
         const position = geometry.attributes.position;
         const tempV = new THREE.Vector3();
 
@@ -1091,16 +1096,11 @@ if (modelViewerEl) {
         }
         position.needsUpdate = true;
         geometry.computeVertexNormals();
-        console.log(`[THREE.JS] Đã san phẳng các đỉnh nhô ra phía sau của mesh: ${child.name}`);
-      });
+        console.log(`[THREE.JS] Đã san phẳng các đỉnh nhô ra phía sau của mesh: ${mainMesh.name}`);
 
-      // === BƯỚC 2: TẠO BỨC TƯỜNG MỎNG CHE MẶT SAU (GIỐNG DINH TỈNH TRƯỞNG) ===
-      // Bức tường mỏng (dày 0.05m -> local 0.005) che kín phần cửa sổ phía sau từ mép chậu cây lên
-      scene.traverse((child) => {
-        if (!child.isMesh) return;
-
-        child.geometry.computeBoundingBox();
-        const localSize = child.geometry.boundingBox.getSize(new THREE.Vector3());
+        // === BƯỚC 2: TẠO BỨC TƯỜNG MỎNG CHE MẶT SAU (GIỐNG DINH TỈNH TRƯỞNG) ===
+        geometry.computeBoundingBox();
+        const localSize = geometry.boundingBox.getSize(new THREE.Vector3());
 
         // Chiều rộng tường = 94% chiều rộng phủ bì của model local
         const localWallW = localSize.x * 0.94;
@@ -1130,7 +1130,7 @@ if (modelViewerEl) {
 
         modelRoot.add(coverWall);
         console.log("[THREE.JS] Đã tạo thành công bức tường mỏng che phủ mặt sau giống dinh-tinh-truong.");
-      });
+      }
 
       // Yêu cầu model-viewer render lại khung hình
       modelViewerEl.requestUpdate();
