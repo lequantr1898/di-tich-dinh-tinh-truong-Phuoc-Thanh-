@@ -19,9 +19,7 @@ const ROOM_DATABASE = {
       "anhphong2/anhtoanphong2/anhtoanphong2.3.png"
     ],
     audio: "audiophong2.mp3",
-    videos: [
-      "anhphong2/anhtoanphong2/videophong2.MOV"
-    ],
+
     description: `
       <p>Tại đây trưng bày một số tài liệu, bản đồ, hình ảnh và hiện vật tiêu biểu về quê hương, đất nước, con người Phú Giáo cùng cuộc đấu tranh bền bỉ chống thực dân Pháp xâm lược.</p>
     `,
@@ -86,9 +84,7 @@ const ROOM_DATABASE = {
       "anhphong3/anhtoanphong3/IMG_8712.JPG"
     ],
     audio: "audiophong3.mp3",
-    videos: [
-      "anhphong3/anhtoanphong3/videophong3.MOV"
-    ],
+
     description: `
       <p>Tại đây trưng bày một số tài liệu, bản đồ, hình ảnh và hiện vật tiêu biểu về lịch sử Dân và Quân Phú Giáo oai hùng trong cuộc kháng chiến chống đế quốc Mỹ cứu nước đầy gian khổ.</p>
     `,
@@ -209,9 +205,7 @@ const ROOM_DATABASE = {
       "anhphong4/anhtoanphong4/anhtoanphong4.3.JPG"
     ],
     audio: "audiophong4.mp3",
-    videos: [
-      "anhphong4/anhtoanphong4/videophong4.MOV"
-    ],
+
     description: `
       <p>Tại đây trưng bày một số hình ảnh, hiện vật về Khu Trù Mật và Ấp chiến lược kiểu mới của Mỹ - Ngụy tại Phước Thành xưa.</p>
     `,
@@ -327,10 +321,7 @@ const ROOM_DATABASE = {
       "anhphong5/anhtoanphong5/anhtoanphong5.5.JPG"
     ],
     audio: "audiophong5.mp3",
-    videos: [
-      "anhphong5/anhtoanphong5/videophong5.MOV",
-      "anhphong5/anhtoanphong5/videophong5.2.MOV"
-    ],
+
     description: `
       <p>Tại đây trưng bày một số hình ảnh, hiện vật về Chiến Thắng Phước Thành vẻ vang.</p>
     `,
