@@ -1441,72 +1441,53 @@ if (modelViewerEl) {
 
       if (!modelRoot) return; // Tiếp tục chờ model tải xong
 
-      // 3. Tiến hành xử lý mặt sau trên mọi Mesh thuộc modelRoot (dùng toạ độ thế giới tự động co giãn theo Bounding Box)
-      const worldBox = new THREE.Box3().setFromObject(modelRoot);
-      const size = worldBox.getSize(new THREE.Vector3());
-      const center = worldBox.getCenter(new THREE.Vector3());
-      const minY = worldBox.min.y;
-
-      // Tính các mốc toạ độ thế giới thực tế dựa theo tỉ lệ chuẩn từ dinh-tinh-truong:
-      const worldGutterY = minY + size.y * 0.388; // Ngưỡng chiều cao (Y < 6.7 thế giới chuẩn)
-      const worldZThreshold = center.z - size.z * 0.3489; // Ngưỡng Z phẳng (Z < -5.0 thế giới chuẩn)
-
-      console.log(`[THREE.JS WORLD MAP] minY: ${minY.toFixed(4)}, size.y: ${size.y.toFixed(4)}, size.z: ${size.z.toFixed(4)} | GutterY: ${worldGutterY.toFixed(4)}, ZThreshold: ${worldZThreshold.toFixed(4)}`);
-
-      let modifiedTotal = 0;
-      let hasProcessedMesh = false;
-
+      // 3. Tìm mesh chính của mô hình Dinh (Mesh_0)
+      let mainMesh = null;
       modelRoot.traverse((child) => {
         if (child.isMesh && child.name !== "backWallCover") {
-          const geometry = child.geometry;
-          const position = geometry.attributes.position;
-          if (!position) return;
-          
-          const tempV = new THREE.Vector3();
-          let meshModifiedCount = 0;
-
-          for (let i = 0; i < position.count; i++) {
-            tempV.fromBufferAttribute(position, i);
-            
-            // Chuyển đỉnh sang toạ độ thế giới (world space)
-            child.localToWorld(tempV);
-
-            // Kiểm tra theo toạ độ thế giới thực tế giống hệt dinh-tinh-truong:
-            if (tempV.y < worldGutterY && tempV.z < worldZThreshold) {
-              tempV.z = worldZThreshold; // San phẳng về mặt Z thế giới
-              
-              // Chuyển ngược lại toạ độ local của mesh
-              child.worldToLocal(tempV);
-              position.setXYZ(i, tempV.x, tempV.y, tempV.z);
-              meshModifiedCount++;
-              modifiedTotal++;
-            }
-          }
-
-          if (meshModifiedCount > 0) {
-            position.needsUpdate = true;
-            geometry.computeVertexNormals();
-            console.log(`[THREE.JS] Đã san phẳng ${meshModifiedCount} đỉnh cho mesh ${child.name || "unnamed"}`);
-            hasProcessedMesh = true;
-          }
+          mainMesh = child;
         }
       });
+      if (!mainMesh) return; // Tiếp tục chờ
 
-      // Nếu chưa xử lý được mesh nào, tiếp tục chờ
-      if (!hasProcessedMesh) return;
-
-      // Khi đã xử lý xong: dừng vòng lặp quét
+      // Khi đã tìm thấy cả scene, modelRoot và mainMesh: dừng quét và tiến hành xử lý
       clearInterval(initInterval);
-      console.log(`[THREE.JS] Hoàn tất xử lý mặt sau trong thế giới. Tổng số đỉnh đã san phẳng: ${modifiedTotal}`);
+      console.log(`[THREE.JS] Đã tìm thấy mesh chính: ${mainMesh.name}. Bắt đầu xử lý...`);
 
-      // === BƯỚC 2: TẠO BỨC TƯỜNG MỎNG TRÊN SCENE THẾ GIỚI ===
-      const wallW = size.x * 0.94; // Chiều rộng thế giới (khít mép viền bên)
-      const wallH = size.y * 0.3563; // Chiều cao thế giới (từ bồn hoa Y=0.55 lên Y=6.7)
-      const wallD = size.z * 0.0035; // Độ dày thế giới
+      // === BƯỚC 1: XÓA/SAN PHẲNG MÁI CHE MẶT SAU (HỆ TOẠ ĐỘ LOCAL GLB: Z-UP, Y-DEPTH) ===
+      const geometry = mainMesh.geometry;
+      const position = geometry.attributes.position;
+      const tempV = new THREE.Vector3();
+      let modifiedCount = 0;
 
-      const coverWallGeo = new THREE.BoxGeometry(wallW, wallH, wallD);
+      for (let i = 0; i < position.count; i++) {
+        tempV.fromBufferAttribute(position, i);
+
+        // Trong tệp GLB gốc:
+        // Local Z là trục đứng (chiều cao), đáy là -0.6793, mái che dưới 6.7m tương đương Z < -0.045
+        // Local Y là trục sâu (chiều sâu), mặt sau lồi ra tương đương Y < -0.473
+        if (tempV.z < -0.045 && tempV.y < -0.473) {
+          tempV.y = -0.473; // San phẳng mặt sau về Y = -0.473
+          position.setXYZ(i, tempV.x, tempV.y, tempV.z);
+          modifiedCount++;
+        }
+      }
+
+      position.needsUpdate = true;
+      geometry.computeVertexNormals();
+      console.log(`[THREE.JS] Đã san phẳng ${modifiedCount} đỉnh mặt sau.`);
+
+      // === BƯỚC 2: TẠO BỨC TƯỜNG MỎNG CHE MẶT SAU (HỆ TOẠ ĐỘ LOCAL CỦA MODELROOT) ===
+      geometry.computeBoundingBox();
+      const localSize = geometry.boundingBox.getSize(new THREE.Vector3());
+
+      const localWallW = localSize.x * 0.94; // Chiều rộng khít mép viền bên (1.78)
+      const localWallD = 0.005; // Chiều dày tường mỏng (world 0.05m)
+      const localWallH = 0.582; // Chiều cao tường đứng (world 6.15m)
+
+      const coverWallGeo = new THREE.BoxGeometry(localWallW, localWallD, localWallH);
       const coverWallMat = new THREE.MeshStandardMaterial({
-        color: 0xE7D5BC, // Tông màu kem ấm giống mặt tiền dinh
+        color: 0xE7D5BC, // Tông màu kem ấm giống dinh-tinh-truong
         roughness: 0.9,
         metalness: 0.05,
         side: THREE.DoubleSide
@@ -1514,24 +1495,24 @@ if (modelViewerEl) {
       const coverWall = new THREE.Mesh(coverWallGeo, coverWallMat);
       coverWall.name = "backWallCover";
 
-      // Vị trí thế giới của bức tường:
-      const worldWallY = (minY + size.y * 0.0319) + (wallH / 2);
-      const worldWallZ = center.z - size.z * 0.351; // Đặt dịch ra sau 1 chút so với mặt phẳng phẳng hoá
-
-      coverWall.position.set(center.x, worldWallY, worldWallZ);
+      // Vị trí local chuẩn:
+      // X = 0
+      // Y = -0.476 (Vị trí lùi sau world Z = -5.03)
+      // Z = -0.336 (Tâm đứng của tường trên trục Z local)
+      coverWall.position.set(0, -0.476, -0.336);
       coverWall.castShadow = true;
       coverWall.receiveShadow = true;
 
-      // Xóa tường cũ trên scene thế giới nếu có
-      const oldWall = scene.getObjectByName("backWallCover");
+      // Xóa tường cũ trên modelRoot nếu có trước khi thêm mới
+      const oldWall = modelRoot.getObjectByName("backWallCover");
       if (oldWall) {
-        scene.remove(oldWall);
+        modelRoot.remove(oldWall);
       }
 
-      scene.add(coverWall);
-      console.log(`[THREE.JS] Đã chèn tường thế giới đứng tại Y: ${worldWallY.toFixed(4)}, Z: ${worldWallZ.toFixed(4)}`);
+      modelRoot.add(coverWall);
+      console.log("[THREE.JS] Đã tạo thành công bức tường mỏng che phủ mặt sau.");
 
-      // Yêu cầu model-viewer render lại khung hình
+      // Yêu cầu model-viewer render lại
       modelViewerEl.requestUpdate();
 
     } catch (e) {
