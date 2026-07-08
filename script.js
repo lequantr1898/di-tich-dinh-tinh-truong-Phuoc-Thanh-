@@ -4,6 +4,7 @@ const ROOM_DATABASE = {
   1: {
     name: "Phòng trưng bày 01",
     subtitle: "Phú Giáo trên đường phát triển",
+    subtitleEN: "Phu Giao on the path of development",
     views: [],
     artifacts: [],
     available: false
@@ -11,25 +12,36 @@ const ROOM_DATABASE = {
   2: {
     name: "Phòng trưng bày 02",
     subtitle: "Quê hương, đất nước, con người và cuộc đấu tranh chống thực dân Pháp",
+    subtitleEN: "Homeland, Country, People and the anti-French colonialist struggle",
     views: [
       "anhphong2/anhtoanphong2/anhtoanphong2.1.JPG",
       "anhphong2/anhtoanphong2/anhtoanphong2.2.png",
       "anhphong2/anhtoanphong2/anhtoanphong2.3.png"
     ],
-    audio: "",
+    audio: "audiophong2.mp3",
+    videos: [
+      "anhphong2/anhtoanphong2/videophong2.MOV"
+    ],
     description: `
       <p>Tại đây trưng bày một số tài liệu, bản đồ, hình ảnh và hiện vật tiêu biểu về quê hương, đất nước, con người Phú Giáo cùng cuộc đấu tranh bền bỉ chống thực dân Pháp xâm lược.</p>
+    `,
+    descriptionEN: `
+      <p>This section showcases typical documents, maps, photographs, and artifacts about the homeland, country, and people of Phu Giao, alongside their persistent struggle against the French colonialist invasion.</p>
     `,
     artifacts: [
       {
         id: "room2_marker1",
         name: "Hiện vật trưng bày phòng 2 - Nhóm 1",
+        nameEN: "Room 2 Exhibits - Group 1",
         viewIndex: 1,
         xRatio: 0.615,
         yRatio: 0.505,
         audio: "",
         description: `
           <p>Tài liệu, bản đồ giới thiệu về dân cư và địa bàn hoạt động. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        descriptionEN: `
+          <p>Documents and maps depicting the population and area of activity. Detailed description is being updated...</p>
         `,
         images: [
           "anhphong2/anhhienvat2/anhhienvat2.1.JPG",
@@ -43,12 +55,16 @@ const ROOM_DATABASE = {
       {
         id: "room2_marker2",
         name: "Hiện vật trưng bày phòng 2 - Nhóm 2",
+        nameEN: "Room 2 Exhibits - Group 2",
         viewIndex: 2,
         xRatio: 0.499,
         yRatio: 0.450,
         audio: "",
         description: `
           <p>Tranh vẽ tư liệu lịch sử và tủ trưng bày khí giới tự tạo thời kỳ kháng chiến chống Pháp. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        descriptionEN: `
+          <p>Historical documentary paintings and a display cabinet of homemade weapons during the anti-French resistance. Detailed description is being updated...</p>
         `,
         images: [
           "anhphong2/anhhienvat2/anhhienvat2.7.JPG",
@@ -65,23 +81,34 @@ const ROOM_DATABASE = {
   3: {
     name: "Phòng trưng bày 03",
     subtitle: "Dân – Quân Phú Giáo trong cuộc kháng chiến chống Mỹ",
+    subtitleEN: "Phu Giao Soldiers and People in the anti-American resistance war",
     views: [
       "anhphong3/anhtoanphong3/IMG_8712.JPG"
     ],
-    audio: "",
+    audio: "audiophong3.mp3",
+    videos: [
+      "anhphong3/anhtoanphong3/videophong3.MOV"
+    ],
     description: `
       <p>Tại đây trưng bày một số tài liệu, bản đồ, hình ảnh và hiện vật tiêu biểu về lịch sử Dân và Quân Phú Giáo oai hùng trong cuộc kháng chiến chống đế quốc Mỹ cứu nước đầy gian khổ.</p>
+    `,
+    descriptionEN: `
+      <p>Displays representative documents, maps, photos, and artifacts illustrating the heroic history of Phu Giao's soldiers and people during the arduous anti-American resistance war for national salvation.</p>
     `,
     artifacts: [
       {
         id: "room3_marker1",
         name: "Hiện vật trưng bày phòng 3 - Nhóm 1",
+        nameEN: "Room 3 Exhibits - Group 1",
         viewIndex: 0,
         xRatio: 0.305,
         yRatio: 0.420,
         audio: "",
         description: `
           <p>Các hình ảnh và tranh tư liệu lịch sử mô tả trận chiến quyết liệt. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        descriptionEN: `
+          <p>Historical images and paintings depicting the fierce battle. Detailed description is being updated...</p>
         `,
         images: [
           "anhphong3/anhhienvat3/anhhienvat3.5.JPG",
@@ -130,12 +157,16 @@ const ROOM_DATABASE = {
       {
         id: "room3_marker2",
         name: "Hiện vật trưng bày phòng 3 - Nhóm 2",
+        nameEN: "Room 3 Exhibits - Group 2",
         viewIndex: 0,
         xRatio: 0.699,
         yRatio: 0.490,
         audio: "",
         description: `
           <p>Bảng vàng danh dự vinh danh Bà mẹ Việt Nam Anh hùng của huyện Phú Giáo. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        descriptionEN: `
+          <p>Roll of Honor dedicating the Heroic Vietnamese Mothers of Phu Giao District. Detailed description is being updated...</p>
         `,
         images: [
           "anhphong3/anhhienvat3/anhhienvat3.46.JPG",
@@ -147,12 +178,16 @@ const ROOM_DATABASE = {
       {
         id: "room3_marker3",
         name: "Hiện vật trưng bày phòng 3 - Nhóm 3",
+        nameEN: "Room 3 Exhibits - Group 3",
         viewIndex: 0,
         xRatio: 0.778,
         yRatio: 0.785,
         audio: "",
         description: `
           <p>Tủ kính trưng bày trang thiết bị quân nhu như mũ sắt, quân trang của chiến sĩ. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        descriptionEN: `
+          <p>Display cabinet containing military equipment, steel helmets, and gear of soldiers. Detailed description is being updated...</p>
         `,
         images: [
           "anhphong3/anhhienvat3/anhhienvat3.1.JPG",
@@ -167,25 +202,36 @@ const ROOM_DATABASE = {
   4: {
     name: "Phòng trưng bày 04",
     subtitle: "Khu Trù Mật - Ấp chiến lược kiểu mới của Mỹ - Ngụy",
+    subtitleEN: "The Agrovilles - New-style Strategic Hamlets of the US-Diem regime",
     views: [
       "anhphong4/anhtoanphong4/anhtoanphong4.1.JPG",
       "anhphong4/anhtoanphong4/anhtoanphong4.2.png",
       "anhphong4/anhtoanphong4/anhtoanphong4.3.JPG"
     ],
-    audio: "",
+    audio: "audiophong4.mp3",
+    videos: [
+      "anhphong4/anhtoanphong4/videophong4.MOV"
+    ],
     description: `
       <p>Tại đây trưng bày một số hình ảnh, hiện vật về Khu Trù Mật và Ấp chiến lược kiểu mới của Mỹ - Ngụy tại Phước Thành xưa.</p>
+    `,
+    descriptionEN: `
+      <p>Displays photographs and artifacts about the Agroville and the new-type Strategic Hamlet constructed by the US-Diem regime in Phuoc Thanh in the past.</p>
     `,
     artifacts: [
       {
         id: "room4_marker1",
         name: "Hiện vật trưng bày phòng 4 - Nhóm 1",
+        nameEN: "Room 4 Exhibits - Group 1",
         viewIndex: 0,
         xRatio: 0.347,
         yRatio: 0.555,
         audio: "",
         description: `
           <p>Mẫu hiện vật thuộc tủ trưng bày số 1 phòng 4. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        descriptionEN: `
+          <p>Sample exhibits belonging to display cabinet 1 in Room 4. Detailed description is being updated...</p>
         `,
         images: [
           "anhphong4/anhhienvat4/anhhienvat4.5.JPG",
@@ -198,12 +244,16 @@ const ROOM_DATABASE = {
       {
         id: "room4_marker2",
         name: "Hiện vật trưng bày phòng 4 - Nhóm 2",
+        nameEN: "Room 4 Exhibits - Group 2",
         viewIndex: 0,
         xRatio: 0.573,
         yRatio: 0.540,
         audio: "",
         description: `
           <p>Mẫu hiện vật thuộc khu vực trưng bày số 2 phòng 4. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        descriptionEN: `
+          <p>Sample exhibits belonging to display area 2 in Room 4. Detailed description is being updated...</p>
         `,
         images: [
           "anhphong4/anhhienvat4/anhhienvat4.1.JPG",
@@ -215,12 +265,16 @@ const ROOM_DATABASE = {
       {
         id: "room4_marker3",
         name: "Hiện vật trưng bày phòng 4 - Nhóm 3",
+        nameEN: "Room 4 Exhibits - Group 3",
         viewIndex: 0,
         xRatio: 0.771,
         yRatio: 0.574,
         audio: "",
         description: `
           <p>Mẫu hiện vật thuộc tủ trưng bày số 3 phòng 4. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        descriptionEN: `
+          <p>Sample exhibits belonging to display cabinet 3 in Room 4. Detailed description is being updated...</p>
         `,
         images: [
           "anhphong4/anhhienvat4/anhhienvat4.23.JPG",
@@ -231,12 +285,16 @@ const ROOM_DATABASE = {
       {
         id: "room4_marker4",
         name: "Hiện vật trưng bày phòng 4 - Nhóm 4",
+        nameEN: "Room 4 Exhibits - Group 4",
         viewIndex: 1,
         xRatio: 0.608,
         yRatio: 0.570,
         audio: "",
         description: `
           <p>Các tư liệu, hình ảnh lịch sử thuộc khu vực trưng bày số 4 phòng 4. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        descriptionEN: `
+          <p>Historical documents and images belonging to display area 4 in Room 4. Detailed description is being updated...</p>
         `,
         images: [
           "anhphong4/anhhienvat4/anhhienvat4.10.JPG",
@@ -260,6 +318,7 @@ const ROOM_DATABASE = {
   5: {
     name: "Phòng trưng bày 05",
     subtitle: "Chiến thắng Phước Thành",
+    subtitleEN: "The Phuoc Thanh Victory",
     views: [
       "anhphong5/anhtoanphong5/anhtoanphong5.1.JPG",
       "anhphong5/anhtoanphong5/anhtoanphong5.2.JPG",
@@ -267,20 +326,31 @@ const ROOM_DATABASE = {
       "anhphong5/anhtoanphong5/anhtoanphong5.4.JPG",
       "anhphong5/anhtoanphong5/anhtoanphong5.5.JPG"
     ],
-    audio: "",
+    audio: "audiophong5.mp3",
+    videos: [
+      "anhphong5/anhtoanphong5/videophong5.MOV",
+      "anhphong5/anhtoanphong5/videophong5.2.MOV"
+    ],
     description: `
       <p>Tại đây trưng bày một số hình ảnh, hiện vật về Chiến Thắng Phước Thành vẻ vang.</p>
+    `,
+    descriptionEN: `
+      <p>Showcases historical photographs and artifacts detailing the glorious Phuoc Thanh victory.</p>
     `,
     artifacts: [
       {
         id: "room5_marker1",
         name: "Hiện vật trưng bày phòng 5 - Nhóm 1",
+        nameEN: "Room 5 Exhibits - Group 1",
         viewIndex: 0,
         xRatio: 0.288,
         yRatio: 0.490,
         audio: "",
         description: `
           <p>Mẫu hiện vật thuộc tủ trưng bày số 1 phòng 5. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        descriptionEN: `
+          <p>Sample exhibits belonging to display cabinet 1 in Room 5. Detailed description is being updated...</p>
         `,
         images: [
           "anhphong5/anhhienvat5/anhhienvat5.1.JPG",
@@ -297,12 +367,16 @@ const ROOM_DATABASE = {
       {
         id: "room5_marker2",
         name: "Hiện vật trưng bày phòng 5 - Nhóm 2",
+        nameEN: "Room 5 Exhibits - Group 2",
         viewIndex: 1,
         xRatio: 0.169,
         yRatio: 0.570,
         audio: "",
         description: `
           <p>Mẫu hiện vật thuộc khu vực trưng bày số 2 phòng 5. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        descriptionEN: `
+          <p>Sample exhibits belonging to display area 2 in Room 5. Detailed description is being updated...</p>
         `,
         images: [
           "anhphong5/anhhienvat5/anhhienvat5.39.JPG",
@@ -318,12 +392,16 @@ const ROOM_DATABASE = {
       {
         id: "room5_marker3",
         name: "Hiện vật trưng bày phòng 5 - Nhóm 3",
+        nameEN: "Room 5 Exhibits - Group 3",
         viewIndex: 2,
         xRatio: 0.228,
         yRatio: 0.585,
         audio: "",
         description: `
           <p>Mẫu hiện vật thuộc tủ trưng bày số 3 phòng 5. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        descriptionEN: `
+          <p>Sample exhibits belonging to display cabinet 3 in Room 5. Detailed description is being updated...</p>
         `,
         images: [
           "anhphong5/anhhienvat5/anhhienvat5.45.JPG",
@@ -336,12 +414,16 @@ const ROOM_DATABASE = {
       {
         id: "room5_marker4",
         name: "Hiện vật trưng bày phòng 5 - Nhóm 4",
+        nameEN: "Room 5 Exhibits - Group 4",
         viewIndex: 3,
         xRatio: 0.310,
         yRatio: 0.450,
         audio: "",
         description: `
           <p>Các tư liệu, hình ảnh lịch sử thuộc sa bàn hoặc mô hình trung tâm phòng 5. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        descriptionEN: `
+          <p>Historical documents and images belonging to the center map or base model in Room 5. Detailed description is being updated...</p>
         `,
         images: [
           "anhphong5/anhhienvat5/anhhienvat5.10.JPG",
@@ -358,12 +440,16 @@ const ROOM_DATABASE = {
       {
         id: "room5_marker5",
         name: "Hiện vật trưng bày phòng 5 - Nhóm 5",
+        nameEN: "Room 5 Exhibits - Group 5",
         viewIndex: 3,
         xRatio: 0.729,
         yRatio: 0.500,
         audio: "",
         description: `
           <p>Mẫu hiện vật thuộc tủ trưng bày số 5 phòng 5. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        descriptionEN: `
+          <p>Sample exhibits belonging to display cabinet 5 in Room 5. Detailed description is being updated...</p>
         `,
         images: [
           "anhphong5/anhhienvat5/anhhienvat5.19.JPG",
@@ -377,12 +463,16 @@ const ROOM_DATABASE = {
       {
         id: "room5_marker6",
         name: "Hiện vật trưng bày phòng 5 - Nhóm 6",
+        nameEN: "Room 5 Exhibits - Group 6",
         viewIndex: 4,
         xRatio: 0.551,
         yRatio: 0.520,
         audio: "",
         description: `
           <p>Hình ảnh, hiện vật thuộc tủ trưng bày số 6 phòng 5. Nội dung thuyết minh chi tiết đang được cập nhật...</p>
+        `,
+        descriptionEN: `
+          <p>Images and artifacts belonging to display cabinet 6 in Room 5. Detailed description is being updated...</p>
         `,
         images: [
           "anhphong5/anhhienvat5/anhhienvat5.25.JPG",
@@ -519,9 +609,9 @@ function showBuildingOverview() {
   currentViewMode = "building";
   activeRoomId = null;
 
-  // Set title capsule
-  const appTitle = document.getElementById("appTitle");
-  if (appTitle) appTitle.textContent = "Di Tích Lịch Sử Dinh Tỉnh Trưởng Phước Thành";
+  // Hide title capsule in building mode
+  const headerCapsule = document.querySelector(".header-capsule");
+  if (headerCapsule) headerCapsule.style.display = "none";
 
   // Hide room controls and info button
   const backBtn = document.getElementById("backBtn");
@@ -562,13 +652,26 @@ function loadRoomScreen(roomId) {
   // Auto close popups/drawers when opening a room
   hideArtifactDrawer();
   closeGlobalModal();
+  pauseIntroAudio();
 
   const room = ROOM_DATABASE[roomId];
   if (!room) return;
 
   if (!room.available) {
     const updatingLabel = document.getElementById("updatingLabel");
-    if (updatingLabel) updatingLabel.textContent = room.name;
+    if (updatingLabel) {
+      updatingLabel.textContent = currentLang === 'en' ? 'Exhibition Room 01' : room.name;
+    }
+    const updatingMsg = document.getElementById("updatingMessage");
+    if (updatingMsg) {
+      updatingMsg.innerHTML = currentLang === 'en'
+        ? 'The content of this exhibition room is currently being updated.<br>Please check back later!'
+        : 'Nội dung phòng này đang được cập nhật.<br>Vui lòng quay lại sau!';
+    }
+    const okBtn = document.querySelector(".updating-btn-ok");
+    if (okBtn) {
+      okBtn.textContent = currentLang === 'en' ? 'OK' : 'ĐỒNG Ý';
+    }
     const updatingDialog = document.getElementById("updatingDialog");
     if (updatingDialog) updatingDialog.style.display = "flex";
     return;
@@ -578,10 +681,16 @@ function loadRoomScreen(roomId) {
   currentViewMode = "room";
   currentViewIndex = 0;
 
-  // Update capsule title
-  const titleNumberStr = room.name.replace("Phòng trưng bày", "Phòng trưng bày số");
+  // Update and show capsule title
+  const titleNumberStr = currentLang === 'en'
+    ? room.name.replace("Phòng trưng bày", "Exhibition Room")
+    : room.name.replace("Phòng trưng bày", "Phòng trưng bày số");
+  const subtitle = currentLang === 'en' ? room.subtitleEN : room.subtitle;
   const appTitle = document.getElementById("appTitle");
-  if (appTitle) appTitle.textContent = `${titleNumberStr} - ${room.subtitle}`;
+  if (appTitle) appTitle.textContent = `${titleNumberStr} - ${subtitle}`;
+
+  const headerCapsule = document.querySelector(".header-capsule");
+  if (headerCapsule) headerCapsule.style.display = "block";
 
   // Show back button, show zoom controls, show room info button
   const backBtn = document.getElementById("backBtn");
@@ -656,8 +765,9 @@ function renderRoomView() {
       const lat = h - (artifact.yRatio * h);
       const lng = artifact.xRatio * w;
 
+      const name = currentLang === 'en' ? (artifact.nameEN || artifact.name) : artifact.name;
       const artPin = L.marker([lat, lng], { icon: createArtifactPin() }).addTo(map);
-      artPin.bindTooltip(artifact.name, {
+      artPin.bindTooltip(name, {
         permanent: false,
         direction: 'top',
         className: 'room-tooltip',
@@ -727,19 +837,24 @@ function showArtifactDrawer(artifact) {
 
   // Set title & badge details
   const room = ROOM_DATABASE[activeRoomId];
-  document.getElementById("drawerRoomName").textContent = room.name;
-  document.getElementById("drawerRoomSubtitle").textContent = room.subtitle;
-  document.getElementById("drawerArtifactName").textContent = artifact.name;
+  const rName = currentLang === 'en' ? room.name.replace("Phòn trưng bày", "Exhibition Room").replace("Phòng trưng bày", "Exhibition Room") : room.name;
+  const rSubtitle = currentLang === 'en' ? room.subtitleEN : room.subtitle;
+  const aName = currentLang === 'en' ? (artifact.nameEN || artifact.name) : artifact.name;
+  const aDesc = currentLang === 'en' ? (artifact.descriptionEN || artifact.description) : artifact.description;
+
+  document.getElementById("drawerRoomName").textContent = rName;
+  document.getElementById("drawerRoomSubtitle").textContent = rSubtitle;
+  document.getElementById("drawerArtifactName").textContent = aName;
 
   // Insert description text
-  document.getElementById("artifactTextDesc").innerHTML = artifact.description;
+  document.getElementById("artifactTextDesc").innerHTML = aDesc;
 
   // Open drawer
   const drawer = document.getElementById("drawerPanel");
   drawer.classList.add("open");
   document.body.classList.add("drawer-open");
 
-  // Hi\u1ec3n th\u1ecb backdrop tr\u00ean mobile
+  // Hiển thị backdrop trên mobile
   if (window.innerWidth <= 768) {
     document.getElementById("mobileDrawerBackdrop").style.display = "block";
   }
@@ -762,19 +877,53 @@ function showRoomInfo() {
   currentArtifact = null; // Set to null because we are introducing the room itself
 
   // Set titles
-  document.getElementById("drawerRoomName").textContent = room.name;
-  document.getElementById("drawerRoomSubtitle").textContent = room.subtitle;
-  document.getElementById("drawerArtifactName").textContent = "GIỚI THIỆU PHÒNG TRƯNG BÀY";
+  const rName = currentLang === 'en' ? room.name.replace("Phòng trưng bày", "Exhibition Room") : room.name;
+  const rSubtitle = currentLang === 'en' ? room.subtitleEN : room.subtitle;
+  const aName = currentLang === 'en' ? "EXHIBITION ROOM INTRODUCTION" : "GIỚI THIỆU PHÒNG TRƯNG BÀY";
+  const rDesc = currentLang === 'en' ? (room.descriptionEN || room.description) : room.description;
+
+  document.getElementById("drawerRoomName").textContent = rName;
+  document.getElementById("drawerRoomSubtitle").textContent = rSubtitle;
+  document.getElementById("drawerArtifactName").textContent = aName;
 
   // Description
-  document.getElementById("artifactTextDesc").innerHTML = room.description || "<p style='font-style: italic; color:#8c7365;'>Thông tin chi tiết của phòng này đang được cập nhật...</p>";
+  const defaultEmptyDesc = currentLang === 'en'
+    ? "<p style='font-style: italic; color:#8c7365;'>Details of this exhibition room are being updated...</p>"
+    : "<p style='font-style: italic; color:#8c7365;'>Thông tin chi tiết của phòng này đang được cập nhật...</p>";
+  document.getElementById("artifactTextDesc").innerHTML = rDesc || defaultEmptyDesc;
 
   // Load Audio timeline/narration if available
   setupAudioPlayer(room.audio);
 
-  // Setup room images inside Images Tab
+  // Setup room images/videos inside Images Tab
   const grid = document.getElementById("artifactImagesGrid");
   grid.innerHTML = "";
+
+  // Render videos first if available
+  if (room.videos && room.videos.length) {
+    room.videos.forEach((videoUrl) => {
+      const videoWrapper = document.createElement("div");
+      videoWrapper.className = "mosaic-item video-item";
+      
+      const videoEl = document.createElement("video");
+      videoEl.src = videoUrl;
+      videoEl.controls = true;
+      videoEl.playsInline = true;
+      
+      videoEl.addEventListener("play", () => {
+        // Pause all other video elements in the grid
+        document.querySelectorAll("#artifactImagesGrid video").forEach(v => {
+          if (v !== videoEl) v.pause();
+        });
+        // Pause narrator audio
+        pauseAudio();
+      });
+      
+      videoWrapper.appendChild(videoEl);
+      grid.appendChild(videoWrapper);
+    });
+  }
+
   if (room.views && room.views.length) {
     room.views.forEach((v, index) => {
       const itemEl = document.createElement("div");
@@ -791,8 +940,12 @@ function showRoomInfo() {
       itemEl.appendChild(imgEl);
       grid.appendChild(itemEl);
     });
-  } else {
-    grid.innerHTML = `<div style="grid-column: span 3; text-align: center; color: #8c7365; font-size: 13.5px; padding: 30px; font-style: italic;">Chưa có hình ảnh phòng.</div>`;
+  }
+
+  // If no views and no videos are available
+  if ((!room.views || !room.views.length) && (!room.videos || !room.videos.length)) {
+    const noImagesText = currentLang === 'en' ? "No exhibition room images available." : "Chưa có hình ảnh phòng.";
+    grid.innerHTML = `<div style="grid-column: span 3; text-align: center; color: #8c7365; font-size: 13.5px; padding: 30px; font-style: italic;">${noImagesText}</div>`;
   }
 
   // Activate default info tab and slide open panel
@@ -810,11 +963,18 @@ function hideArtifactDrawer() {
   drawer.classList.remove("open");
   document.body.classList.remove("drawer-open");
 
-  // Ẩn backdrop tr\u00ean mobile
+  // Ẩn backdrop trên mobile
   document.getElementById("mobileDrawerBackdrop").style.display = "none";
 
   // Pause audio playback
   pauseAudio();
+
+  // Pause and reset all video elements in the grid
+  document.querySelectorAll("#artifactImagesGrid video").forEach(v => {
+    v.pause();
+    v.currentTime = 0;
+  });
+
   currentArtifact = null;
 }
 
@@ -845,7 +1005,8 @@ function setupArtifactImagesTab() {
   grid.innerHTML = "";
 
   if (!currentArtifact || !currentArtifact.images || !currentArtifact.images.length) {
-    grid.innerHTML = `<div style="grid-column: span 3; text-align: center; color: #8c7365; font-size: 13.5px; padding: 30px; font-style: italic;">Chưa có hình ảnh hiện vật.</div>`;
+    const noImagesText = currentLang === 'en' ? "No exhibit images available." : "Chưa có hình ảnh hiện vật.";
+    grid.innerHTML = `<div style="grid-column: span 3; text-align: center; color: #8c7365; font-size: 13.5px; padding: 30px; font-style: italic;">${noImagesText}</div>`;
     return;
   }
 
@@ -857,7 +1018,8 @@ function setupArtifactImagesTab() {
     const img = document.createElement("img");
     img.src = imgSrc;
     img.loading = "lazy";
-    img.alt = `Hình ảnh hiện vật ${idx + 1}`;
+    const altText = currentLang === 'en' ? `Exhibit image ${idx + 1}` : `Hình ảnh hiện vật ${idx + 1}`;
+    img.alt = altText;
 
     item.appendChild(img);
     grid.appendChild(item);
@@ -876,8 +1038,14 @@ function setupAudioPlayer(audioUrl) {
     return;
   }
 
+  // Handle English audio file name mapping (e.g., audiophong2.mp3 -> audiophong2EN.mp3)
+  let finalUrl = audioUrl;
+  if (currentLang === 'en') {
+    finalUrl = audioUrl.replace(".mp3", "EN.mp3");
+  }
+
   audioSec.style.display = "flex";
-  audioElement.src = audioUrl;
+  audioElement.src = finalUrl;
   audioElement.load();
 
   // Reset UI
@@ -904,6 +1072,8 @@ function controlAudio() {
   if (isAudioPlaying) {
     pauseAudio();
   } else {
+    // Pause any playing videos when starting room/artifact audio
+    document.querySelectorAll("#artifactImagesGrid video").forEach(v => v.pause());
     audioElement.play().then(() => {
       setAudioPlayState(true);
     }).catch(err => console.log("Audio play error: ", err));
@@ -1147,18 +1317,23 @@ function viewRoomImages(roomId) {
     }
   });
 
-  const title = `Hình Ảnh ${room.name.replace("Phòng trưng bày", "Phòng trưng bày số")}`;
+  const title = currentLang === 'en'
+    ? `Images of ${room.name.replace("Phòng trưng bày", "Exhibition Room")}`
+    : `Hình Ảnh ${room.name.replace("Phòng trưng bày", "Phòng trưng bày số")}`;
   let gridHTML = "";
 
   if (!roomAllImages.length) {
-    gridHTML = `<p style="text-align: center; color: #8c7365; font-style: italic; padding: 25px;">Hình ảnh phòng trưng bày đang được cập nhật...</p>`;
+    const emptyMsg = currentLang === 'en'
+      ? "Exhibition room images are being updated..."
+      : "Hình ảnh phòng trưng bày đang được cập nhật...";
+    gridHTML = `<p style="text-align: center; color: #8c7365; font-style: italic; padding: 25px;">${emptyMsg}</p>`;
   } else {
     gridHTML = `
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px;">
         ${roomAllImages.map((src, i) => `
           <div style="aspect-ratio: 1; overflow: hidden; border-radius: 6px; border: 1.5px solid #dca05f; cursor: pointer;" 
                onclick="showLightbox(${JSON.stringify(roomAllImages).replace(/"/g, "'")}, ${i})">
-            <img src="${src}" style="width: 100%; height: 100%; object-fit: cover;" alt="Hình ảnh phòng ${i + 1}">
+            <img src="${src}" style="width: 100%; height: 100%; object-fit: cover;" alt="${currentLang === 'en' ? 'Room image' : 'Hình ảnh phòng'} ${i + 1}">
           </div>
         `).join("")}
       </div>
@@ -1169,8 +1344,27 @@ function viewRoomImages(roomId) {
 }
 
 function viewProjectDetails() {
-  const title = "Thông Tin Dự Án Số Hoá";
-  const body = `
+  // Pause general guide audio when viewing project details
+  pauseIntroAudio();
+
+  const title = currentLang === 'en' ? "Digital Preservation Project Info" : "Thông Tin Dự Án Số Hoá";
+  const body = currentLang === 'en' ? `
+    <div style="font-family: inherit; font-size: 15px; color: #4e3524; line-height:1.7;">
+      <p style="margin-bottom:14px; text-align:justify;">
+        The project <b>"Digitization of the Phuoc Thanh Governor's Mansion Red Address Historical Monument"</b> is part of a digital transformation initiative designed to preserve, archive, and promote local historical heritage to the general public.
+      </p>
+      
+      <div style="background-color:rgba(189, 49, 7, 0.05); padding:16px; border-left:4px solid #bd3107; border-radius:4px; margin-bottom:16px;">
+        <p style="font-weight:700; color:#bd3107; margin-bottom:6px;">Implemented by:</p>
+        <p>Advanced Digital Skills Specialized Volunteers Team</p>
+        <p>Economics Students green summer volunteer campaign &copy; 2026</p>
+      </div>
+
+      <p style="font-size:13.5px; color:#8c7365; font-style:italic;">
+        All visual media, audio narration, and historical documents are referenced directly from the monument's management board and local media archives.
+      </p>
+    </div>
+  ` : `
     <div style="font-family: inherit; font-size: 15px; color: #4e3524; line-height:1.7;">
       <p style="margin-bottom:14px; text-align:justify;">
         Dự án <b>"Số hoá địa chỉ đỏ di tích kiến trúc nghệ thuật Dinh Tỉnh Trưởng Phước Thành"</b> nằm trong khuôn khổ chương trình chuyển đổi số nhằm lưu trữ, bảo tồn và quảng bá di tích lịch sử đến quần chúng nhân dân.
@@ -1217,24 +1411,45 @@ window.addEventListener('click', (e) => {
 
 // ===== INTRO AUDIO PLAYER =====
 const introAudioEl = new Audio();
-// introAudioEl.src = 'audio_tongquan.mp3'; // Đặt file audio tổng quan ở đây khi có
 let introAudioPlaying = false;
+let introAudioPart = 1;
+
+function pauseIntroAudio() {
+  if (introAudioPlaying) {
+    introAudioEl.pause();
+    introAudioPlaying = false;
+    document.getElementById('introAudioPlayIcon').style.display = 'block';
+    document.getElementById('introAudioPauseIcon').style.display = 'none';
+  }
+}
 
 function toggleIntroAudio() {
-  if (!introAudioEl.src || introAudioEl.src === window.location.href) {
-    alert('Audio thuyết minh đang được cập nhật. Vui lòng quay lại sau!');
-    return;
+  // If source isn't set yet, configure it to correct lang part 1
+  if (!introAudioEl.src || introAudioEl.src === window.location.href || introAudioEl.src.includes('undefined')) {
+    const langSuffix = currentLang === 'en' ? 'EN' : '';
+    introAudioEl.src = `audiodinh1${langSuffix}.mp3`;
+    introAudioEl.load();
+    introAudioPart = 1;
   }
+  
+  // Pause any other playing room narrations or videos
+  pauseAudio();
+  document.querySelectorAll("#artifactImagesGrid video").forEach(v => v.pause());
+
   if (introAudioPlaying) {
     introAudioEl.pause();
     introAudioPlaying = false;
   } else {
-    introAudioEl.play();
-    introAudioPlaying = true;
+    introAudioEl.play().then(() => {
+      introAudioPlaying = true;
+    }).catch(err => {
+      console.log("Intro audio play error:", err);
+    });
   }
   document.getElementById('introAudioPlayIcon').style.display = introAudioPlaying ? 'none' : 'block';
   document.getElementById('introAudioPauseIcon').style.display = introAudioPlaying ? 'block' : 'none';
 }
+
 introAudioEl.addEventListener('timeupdate', () => {
   if (!introAudioEl.duration) return;
   const pct = (introAudioEl.currentTime / introAudioEl.duration) * 100;
@@ -1244,12 +1459,27 @@ introAudioEl.addEventListener('timeupdate', () => {
   document.getElementById('introAudioTime').textContent =
     `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
 });
+
 introAudioEl.addEventListener('ended', () => {
-  introAudioPlaying = false;
-  document.getElementById('introAudioPlayIcon').style.display = 'block';
-  document.getElementById('introAudioPauseIcon').style.display = 'none';
-  document.getElementById('introAudioFill').style.width = '0%';
+  if (introAudioPart === 1) {
+    // Chain to part 2
+    introAudioPart = 2;
+    const langSuffix = currentLang === 'en' ? 'EN' : '';
+    introAudioEl.src = `audiodinh2${langSuffix}.mp3`;
+    introAudioEl.load();
+    introAudioEl.play().then(() => {
+      introAudioPlaying = true;
+    }).catch(err => console.log("Intro audio part 2 play error:", err));
+  } else {
+    // Finished part 2
+    introAudioPlaying = false;
+    introAudioPart = 1;
+    document.getElementById('introAudioPlayIcon').style.display = 'block';
+    document.getElementById('introAudioPauseIcon').style.display = 'none';
+    document.getElementById('introAudioFill').style.width = '0%';
+  }
 });
+
 function introAudioSeek(event) {
   if (!introAudioEl.duration) return;
   const track = document.getElementById('introAudioTrack');
@@ -1268,6 +1498,55 @@ function setLang(lang) {
     const content = el.getAttribute('data-' + lang);
     if (content !== null) el.innerHTML = content;
   });
+
+  // 1. Reset/switch General Guide Audio
+  pauseIntroAudio();
+  introAudioPart = 1;
+  const langSuffix = currentLang === 'en' ? 'EN' : '';
+  introAudioEl.src = `audiodinh1${langSuffix}.mp3`;
+  introAudioEl.load();
+  document.getElementById('introAudioFill').style.width = '0%';
+  document.getElementById('introAudioTime').textContent = '00:00';
+
+  // 2. Set backBtn and roomInfoBtn tooltips
+  const backBtn = document.getElementById("backBtn");
+  if (backBtn) {
+    backBtn.title = lang === 'en' ? "Back to Mansion" : "Quay lại dinh";
+  }
+  const roomInfoBtn = document.getElementById("roomInfoBtn");
+  if (roomInfoBtn) {
+    roomInfoBtn.title = lang === 'en' ? "Exhibition room info" : "Thông tin phòng";
+  }
+
+  // 3. Update view status
+  if (currentViewMode === 'room') {
+    const room = ROOM_DATABASE[activeRoomId];
+    if (room) {
+      // Re-set room page title
+      const titleNumberStr = currentLang === 'en'
+        ? room.name.replace("Phòng trưng bày", "Exhibition Room")
+        : room.name.replace("Phòng trưng bày", "Phòng trưng bày số");
+      const subtitle = currentLang === 'en' ? room.subtitleEN : room.subtitle;
+      document.getElementById("appTitle").textContent = `${titleNumberStr} - ${subtitle}`;
+      
+      // Re-render Leaflet maps, overlays, and pins in the new language
+      renderRoomView();
+      
+      // Re-render open drawers if active
+      if (document.body.classList.contains("drawer-open")) {
+        if (currentArtifact) {
+          showArtifactDrawer(currentArtifact);
+        } else {
+          showRoomInfo();
+        }
+      }
+    }
+  } else if (currentViewMode === 'building') {
+    const title = currentLang === 'en'
+      ? "Phuoc Thanh Governor's Mansion Historical Monument"
+      : "Di Tích Lịch Sử Dinh Tỉnh Trưởng Phước Thành";
+    document.getElementById("appTitle").textContent = title;
+  }
 }
 
 // ===== NAVBAR SCROLL EFFECT =====
@@ -1314,6 +1593,9 @@ function navigateToMap() {
   // Auto close popups/drawers
   hideArtifactDrawer();
   closeGlobalModal();
+
+  // Stop intro page audio narration
+  pauseIntroAudio();
 
   // Ẩn intro
   document.getElementById('introPage').classList.remove('visible');
