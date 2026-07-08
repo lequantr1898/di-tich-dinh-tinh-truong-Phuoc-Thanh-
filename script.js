@@ -506,6 +506,14 @@ const DINH_GALLERY_IMAGES = [
   "anhdinh/dinhtinhtruong.png",
   "anhdinh/dinh-tinh-truong-phuoc-thanh-diem-den-du-lich-thu-vi-tren-vung-que-phu-giao-3-1655399170.jpg",
   "anhdinh/0967C44491EF8086B5772E2A2DD1C1C7.jpg",
+  "anhdinh/IMG_8815.JPG",
+  "anhdinh/IMG_8816.JPG",
+  "anhdinh/IMG_8817.JPG",
+  "anhdinh/IMG_8820.JPG",
+  "anhdinh/IMG_8821.JPG",
+  "anhdinh/IMG_8822.JPG",
+  "anhdinh/IMG_8823.JPG",
+  "anhdinh/IMG_8824.JPG",
   "anhphong1/anhtoanphong/anhtoanphong1.1.png"
 ];
 
