@@ -1441,7 +1441,18 @@ if (modelViewerEl) {
 
       if (!modelRoot) return; // Tiếp tục chờ model tải xong
 
-      // 3. Tiến hành xử lý mặt sau trên mọi Mesh thuộc modelRoot (dùng toạ độ thế giới như dinh-tinh-truong)
+      // 3. Tiến hành xử lý mặt sau trên mọi Mesh thuộc modelRoot (dùng toạ độ thế giới tự động co giãn theo Bounding Box)
+      const worldBox = new THREE.Box3().setFromObject(modelRoot);
+      const size = worldBox.getSize(new THREE.Vector3());
+      const center = worldBox.getCenter(new THREE.Vector3());
+      const minY = worldBox.min.y;
+
+      // Tính các mốc toạ độ thế giới thực tế dựa theo tỉ lệ chuẩn từ dinh-tinh-truong:
+      const worldGutterY = minY + size.y * 0.388; // Ngưỡng chiều cao (Y < 6.7 thế giới chuẩn)
+      const worldZThreshold = center.z - size.z * 0.3489; // Ngưỡng Z phẳng (Z < -5.0 thế giới chuẩn)
+
+      console.log(`[THREE.JS WORLD MAP] minY: ${minY.toFixed(4)}, size.y: ${size.y.toFixed(4)}, size.z: ${size.z.toFixed(4)} | GutterY: ${worldGutterY.toFixed(4)}, ZThreshold: ${worldZThreshold.toFixed(4)}`);
+
       let modifiedTotal = 0;
       let hasProcessedMesh = false;
 
@@ -1452,19 +1463,6 @@ if (modelViewerEl) {
           if (!position) return;
           
           const tempV = new THREE.Vector3();
-          let minWorldY = Infinity, maxWorldY = -Infinity;
-          let minWorldZ = Infinity, maxWorldZ = -Infinity;
-
-          for (let i = 0; i < position.count; i++) {
-            tempV.fromBufferAttribute(position, i);
-            child.localToWorld(tempV);
-            if (tempV.y < minWorldY) minWorldY = tempV.y;
-            if (tempV.y > maxWorldY) maxWorldY = tempV.y;
-            if (tempV.z < minWorldZ) minWorldZ = tempV.z;
-            if (tempV.z > maxWorldZ) maxWorldZ = tempV.z;
-          }
-          console.log(`[WORLD COORDINATES] Mesh: ${child.name || "unnamed"}, Y: [${minWorldY.toFixed(4)}, ${maxWorldY.toFixed(4)}], Z: [${minWorldZ.toFixed(4)}, ${maxWorldZ.toFixed(4)}]`);
-
           let meshModifiedCount = 0;
 
           for (let i = 0; i < position.count; i++) {
@@ -1474,9 +1472,8 @@ if (modelViewerEl) {
             child.localToWorld(tempV);
 
             // Kiểm tra theo toạ độ thế giới thực tế giống hệt dinh-tinh-truong:
-            // Y thế giới < 6.7 và Z thế giới < -5.0
-            if (tempV.y < 6.7 && tempV.z < -5.0) {
-              tempV.z = -5.0; // San phẳng về mặt Z = -5.0 thế giới
+            if (tempV.y < worldGutterY && tempV.z < worldZThreshold) {
+              tempV.z = worldZThreshold; // San phẳng về mặt Z thế giới
               
               // Chuyển ngược lại toạ độ local của mesh
               child.worldToLocal(tempV);
@@ -1502,10 +1499,10 @@ if (modelViewerEl) {
       clearInterval(initInterval);
       console.log(`[THREE.JS] Hoàn tất xử lý mặt sau trong thế giới. Tổng số đỉnh đã san phẳng: ${modifiedTotal}`);
 
-      // === BƯỚC 2: TẠO BỨC TƯỜNG MỎNG TRÊN SCENE THẾ GIỚI (GIỐNG HỆT DINH-TINH-TRUONG) ===
-      const wallW = 18.8; // Chiều rộng thế giới
-      const wallH = 6.15; // Chiều cao thế giới (từ Y=0.55 lên Y=6.7)
-      const wallD = 0.05; // Độ dày thế giới
+      // === BƯỚC 2: TẠO BỨC TƯỜNG MỎNG TRÊN SCENE THẾ GIỚI ===
+      const wallW = size.x * 0.94; // Chiều rộng thế giới (khít mép viền bên)
+      const wallH = size.y * 0.3563; // Chiều cao thế giới (từ bồn hoa Y=0.55 lên Y=6.7)
+      const wallD = size.z * 0.0035; // Độ dày thế giới
 
       const coverWallGeo = new THREE.BoxGeometry(wallW, wallH, wallD);
       const coverWallMat = new THREE.MeshStandardMaterial({
@@ -1517,8 +1514,11 @@ if (modelViewerEl) {
       const coverWall = new THREE.Mesh(coverWallGeo, coverWallMat);
       coverWall.name = "backWallCover";
 
-      // Đặt ở vị trí thế giới chuẩn: X = 0, Y = 0.55 + wallH / 2 = 3.625, Z = -5.03
-      coverWall.position.set(0, 3.625, -5.03);
+      // Vị trí thế giới của bức tường:
+      const worldWallY = (minY + size.y * 0.0319) + (wallH / 2);
+      const worldWallZ = center.z - size.z * 0.351; // Đặt dịch ra sau 1 chút so với mặt phẳng phẳng hoá
+
+      coverWall.position.set(center.x, worldWallY, worldWallZ);
       coverWall.castShadow = true;
       coverWall.receiveShadow = true;
 
@@ -1529,7 +1529,7 @@ if (modelViewerEl) {
       }
 
       scene.add(coverWall);
-      console.log("[THREE.JS] Đã tạo thành công bức tường mỏng đứng trên Scene thế giới.");
+      console.log(`[THREE.JS] Đã chèn tường thế giới đứng tại Y: ${worldWallY.toFixed(4)}, Z: ${worldWallZ.toFixed(4)}`);
 
       // Yêu cầu model-viewer render lại khung hình
       modelViewerEl.requestUpdate();
