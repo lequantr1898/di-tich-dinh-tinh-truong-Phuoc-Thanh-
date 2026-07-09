@@ -86,7 +86,7 @@ const ROOM_DATABASE = {
     audio: "audiophong3.mp3",
 
     description: `
-      <p>Tại đây trưng bày một số tài liệu, bản đồ, hình ảnh và hiện vật tiêu biểu về lịch sử Dân và Quân Phú Giáo oai hùng trong cuộc kháng chiến chống đế quốc Mỹ cứu nước đầy gian khổ.</p>
+      <p>Tại đây trưng bày một số tài liệu, bản đồ, hình ảnh và hiện vật tiêu biểu về lịch sử dân và quân Phú Giáo oai hùng trong cuộc kháng chiến chống đế quốc Mỹ cứu nước đầy gian khổ.</p>
     `,
     descriptionEN: `
       <p>Displays representative documents, maps, photos, and artifacts illustrating the heroic history of Phu Giao's soldiers and people during the arduous anti-American resistance war for national salvation.</p>
@@ -615,22 +615,22 @@ function showBuildingOverview() {
   // Hide room controls and info button
   const backBtn = document.getElementById("backBtn");
   if (backBtn) backBtn.style.display = "none";
-  
+
   const sliderPrevBtn = document.getElementById("sliderPrevBtn");
   if (sliderPrevBtn) sliderPrevBtn.style.display = "none";
-  
+
   const sliderNextBtn = document.getElementById("sliderNextBtn");
   if (sliderNextBtn) sliderNextBtn.style.display = "none";
-  
+
   const roomInfoBtn = document.getElementById("roomInfoBtn");
   if (roomInfoBtn) roomInfoBtn.style.display = "none";
-  
+
   const zoomCtrl = document.querySelector(".custom-zoom-control");
   if (zoomCtrl) zoomCtrl.style.display = "none";
 
   // Clear any Leaflet state
   if (activeOverlayImage) {
-    try { map.removeLayer(activeOverlayImage); } catch(e) {}
+    try { map.removeLayer(activeOverlayImage); } catch (e) { }
     activeOverlayImage = null;
   }
   clearMarkers();
@@ -638,10 +638,10 @@ function showBuildingOverview() {
   // Hide Leaflet #map, show 3D model-viewer + room panel
   const mapEl = document.getElementById("map");
   if (mapEl) mapEl.style.display = "none";
-  
+
   const dinhModel = document.getElementById("dinhModel");
   if (dinhModel) dinhModel.style.display = "block";
-  
+
   const roomPanel = document.getElementById("roomPanel");
   if (roomPanel) roomPanel.style.display = "block";
 }
@@ -694,20 +694,20 @@ function loadRoomScreen(roomId) {
   // Show back button, show zoom controls, show room info button
   const backBtn = document.getElementById("backBtn");
   if (backBtn) backBtn.style.display = "flex";
-  
+
   const roomInfoBtn = document.getElementById("roomInfoBtn");
   if (roomInfoBtn) roomInfoBtn.style.display = "inline-flex";
-  
+
   const zoomCtrl = document.querySelector(".custom-zoom-control");
   if (zoomCtrl) zoomCtrl.style.display = "flex";
 
   // Hide 3D model, hide room panel, show Leaflet map
   const dinhModel = document.getElementById("dinhModel");
   if (dinhModel) dinhModel.style.display = "none";
-  
+
   const roomPanel = document.getElementById("roomPanel");
   if (roomPanel) roomPanel.style.display = "none";
-  
+
   const mapEl = document.getElementById("map");
   if (mapEl) mapEl.style.display = "block";
 
@@ -903,12 +903,12 @@ function showRoomInfo() {
     room.videos.forEach((videoUrl) => {
       const videoWrapper = document.createElement("div");
       videoWrapper.className = "mosaic-item video-item";
-      
+
       const videoEl = document.createElement("video");
       videoEl.src = videoUrl;
       videoEl.controls = true;
       videoEl.playsInline = true;
-      
+
       videoEl.addEventListener("play", () => {
         // Pause all other video elements in the grid
         document.querySelectorAll("#artifactImagesGrid video").forEach(v => {
@@ -917,7 +917,7 @@ function showRoomInfo() {
         // Pause narrator audio
         pauseAudio();
       });
-      
+
       videoWrapper.appendChild(videoEl);
       grid.appendChild(videoWrapper);
     });
@@ -927,15 +927,15 @@ function showRoomInfo() {
     room.views.forEach((v, index) => {
       const itemEl = document.createElement("div");
       itemEl.className = "mosaic-item";
-      
+
       const viewsJson = JSON.stringify(room.views).replace(/"/g, "'");
       itemEl.setAttribute("onclick", `showLightbox(${viewsJson}, ${index})`);
-      
+
       const imgEl = document.createElement("img");
       imgEl.src = v;
       imgEl.alt = `${room.name} view ${index + 1}`;
       imgEl.loading = "lazy";
-      
+
       itemEl.appendChild(imgEl);
       grid.appendChild(itemEl);
     });
@@ -1430,7 +1430,7 @@ function toggleIntroAudio() {
     introAudioEl.load();
     introAudioPart = 1;
   }
-  
+
   // Pause any other playing room narrations or videos
   pauseAudio();
   document.querySelectorAll("#artifactImagesGrid video").forEach(v => v.pause());
@@ -1527,10 +1527,10 @@ function setLang(lang) {
         : room.name.replace("Phòng trưng bày", "Phòng trưng bày số");
       const subtitle = currentLang === 'en' ? room.subtitleEN : room.subtitle;
       document.getElementById("appTitle").textContent = `${titleNumberStr} - ${subtitle}`;
-      
+
       // Re-render Leaflet maps, overlays, and pins in the new language
       renderRoomView();
-      
+
       // Re-render open drawers if active
       if (document.body.classList.contains("drawer-open")) {
         if (currentArtifact) {
@@ -1610,7 +1610,7 @@ function navigateToMap() {
     appEl.style.display = 'block';
     appEl.classList.add('active');
   }
-  
+
   // Luôn quay về sơ đồ 3d dinh chính đồng bộ ngay lập tức để tránh độ trễ layout
   showBuildingOverview();
 
@@ -1699,7 +1699,7 @@ if (modelViewerEl) {
       if (attempts % 5 === 0) {
         console.log(`[THREE.JS DEBUG] Attempt: ${attempts}, sceneSymbol: ${sceneSymbol ? "Found" : "Null"}, scene: ${scene ? "Found" : "Null"}`);
       }
-      
+
       if (!scene) return; // Tiếp tục chờ ở chu kỳ sau
 
       // 2. Tìm mesh chính của mô hình Dinh (Mesh_0) bằng cách duyệt toàn bộ scene
@@ -1796,7 +1796,7 @@ function toggleRoomPanel() {
   const panel = document.getElementById("roomPanel");
   if (!panel) return;
   panel.classList.toggle("collapsed");
-  
+
   const iconPath = document.getElementById("roomPanelTogglePath");
   if (iconPath) {
     if (panel.classList.contains("collapsed")) {
